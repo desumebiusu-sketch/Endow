@@ -1,4 +1,4 @@
-* {
+*  {
   box-sizing: border-box;
 }
 
@@ -11,5 +11,71 @@ body {
 
 h1 {
   text-align: center;
-  margin: 30px 0;
+  margin: 30px 0 20px;
+}
+
+.calendar {
+  width: 90%;
+  max-width: 900px;
+  margin: 0 auto 40px;
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.calendar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.calendar-header h2 {
+  margin: 0;
+}
+
+.calendar-header button {
+  border: none;
+  background: #eee;
+  font-size: 18px;
+  padding: 10px 15px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.calendar-header button:hover {
+  background: #ddd;
+}
+
+.weekdays,
+.calendar-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.weekdays div {
+  text-align: center;
+  font-weight: bold;
+  padding: 10px;
+}
+
+.calendar-days {
+  gap: 5px;
+}
+
+.day {
+  min-height: 80px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px;
+  background: #fff;
+}
+
+.day:hover {
+  background: #f0f4ff;
+}
+
+.empty {
+  background: #f8f8f8;
 }
