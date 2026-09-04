@@ -1,0 +1,15 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+  background: #f5f7fa;
+  color: #333;
+}
+
+h1 {
+  text-align: center;
+  margin: 30px 0;
+}
