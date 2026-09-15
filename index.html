@@ -9,7 +9,7 @@
 
 <body>
 
-  <h1>Endow カレンダー</h1>
+  <h1>カレンダー</h1>
 
   <div class="calendar">
 
@@ -43,7 +43,31 @@
     </div>
 
     <div id="calendar-days" class="calendar-days"></div>
+<div class="salary-calculator">
+  <h2>💰 バイト代計算</h2>
 
+  <label>
+    バイトの日数
+    <input type="number" id="days" placeholder="例：10">
+    日
+  </label>
+
+  <label>
+    1日の勤務時間
+    <input type="number" id="hours" placeholder="例：5">
+    時間
+  </label>
+
+  <label>
+    時給
+    <input type="number" id="wage" placeholder="例：1200">
+    円
+  </label>
+
+  <button onclick="calculateSalary()">計算する</button>
+
+  <h3 id="result">ここに給料が表示されます</h3>
+</div>
   </div>
 <script src="script.js"></script>
 </body>

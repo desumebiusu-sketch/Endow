@@ -103,3 +103,13 @@ nextButton.addEventListener("click", () => {
 });
 
 renderCalendar();
+function calculateSalary() {
+  const days = Number(document.getElementById("days").value);
+  const hours = Number(document.getElementById("hours").value);
+  const wage = Number(document.getElementById("wage").value);
+
+  const salary = days * hours * wage;
+
+  document.getElementById("result").textContent =
+    `給料は ${salary.toLocaleString()}円です！`;
+}
