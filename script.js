@@ -6,7 +6,7 @@ const nextButton = document.getElementById("next");
 const eventDate = document.getElementById("event-date");
 const eventTitle = document.getElementById("event-title");
 const addEventButton = document.getElementById("add-event");
-
+const addEventButton = document.getElementById("add-event");
 let currentDate = new Date();
 
 let events = JSON.parse(localStorage.getItem("endow-events")) || {};
