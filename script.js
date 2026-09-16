@@ -10,7 +10,6 @@ const addEventButton = document.getElementById("add-event");
 let currentDate = new Date();
 
 let events = JSON.parse(localStorage.getItem("endow-events")) || {};
-
 function saveEvents() {
   localStorage.setItem("endow-events", JSON.stringify(events));
 }
@@ -91,7 +90,25 @@ addEventButton.addEventListener("click", () => {
 
   alert("予定を追加しました！");
 });
+addWorkButton.addEventListener("click", () => {
+  const date = eventDate.value;
 
+  if (!date) {
+    alert("バイトの日付を選択してください");
+    return;
+  }
+
+  if (!events[date]) {
+    events[date] = [];
+  }
+
+  events[date].push("バイト");
+
+  saveEvents();
+  renderCalendar();
+
+  alert("バイトを追加しました！");
+});
 prevButton.addEventListener("click", () => {
   currentDate.setMonth(currentDate.getMonth() - 1);
   renderCalendar();
