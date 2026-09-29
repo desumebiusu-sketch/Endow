@@ -121,22 +121,3 @@ h1 {
   justify-content: space-between;
   align-items: center;
 }
-
-.delete-event {
-  border: none;
-  background: white;
-  color: red;
-  font-size: 16px;
-  font-weight: bold;
-  cursor: pointer;
-  width: 24px;
-  height: 24px;
-  padding: 0;
-  margin-left: 5px;
-  flex-shrink: 0;
-}
- 
-
-.delete-event:hover {
-  color: red;
-}
