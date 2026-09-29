@@ -44,16 +44,41 @@ function renderCalendar() {
 
     dayElement.appendChild(numberElement);
 
-    if (events[dateKey]) {
-      events[dateKey].forEach((event) => {
-        const eventElement = document.createElement("div");
+    events[dateKey].forEach((event, index) => {
+    const eventElement = document.createElement("div");
+    eventElement.classList.add("event");
 
-        eventElement.classList.add("event");
-        eventElement.textContent = event;
+    // 予定の文字
+    const eventText = document.createElement("span");
+    eventText.textContent = event;
 
-        dayElement.appendChild(eventElement);
-      });
-    }
+    // ×ボタン
+    const deleteButton = document.createElement("button");
+    deleteButton.textContent = "×";
+    deleteButton.classList.add("delete-event");
+
+    // ×ボタンを押したとき
+    deleteButton.addEventListener("click", (e) => {
+      e.stopPropagation();
+
+      if (confirm(`「${event}」を削除しますか？`)) {
+        events[dateKey].splice(index, 1);
+
+        if (events[dateKey].length === 0) {
+          delete events[dateKey];
+        }
+
+        saveEvents();
+        renderCalendar();
+      }
+    });
+
+    eventElement.appendChild(eventText);
+    eventElement.appendChild(deleteButton);
+
+    dayElement.appendChild(eventElement);
+  });
+}
 
     dayElement.addEventListener("click", () => {
       eventDate.value = dateKey;
@@ -61,7 +86,7 @@ function renderCalendar() {
 
     calendarDays.appendChild(dayElement);
   }
-}
+
 
 addEventButton.addEventListener("click", () => {
   const date = eventDate.value;

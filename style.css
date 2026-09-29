@@ -116,3 +116,21 @@ h1 {
   white-space: nowrap;
   text-overflow: ellipsis;
 }
+.event {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.delete-event {
+  border: none;
+  background: transparent;
+  color: #555;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 0 5px;
+}
+
+.delete-event:hover {
+  color: red;
+}
