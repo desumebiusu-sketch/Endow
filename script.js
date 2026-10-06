@@ -162,12 +162,32 @@ renderCalendar();
 
 // 給料計算
 function calculateSalary() {
-  const days = Number(document.getElementById("days").value);
+  const year = currentDate.getFullYear();
+  const month = currentDate.getMonth() + 1;
+
+  let days = 0;
+
+  // 今表示している月のバイトだけを数える
+  Object.keys(events).forEach(dateKey => {
+    const [eventYear, eventMonth] = dateKey.split("-");
+
+    if (
+      Number(eventYear) === year &&
+      Number(eventMonth) === month
+    ) {
+      events[dateKey].forEach(event => {
+        if (event === "バイト") {
+          days++;
+        }
+      });
+    }
+  });
+
   const hours = Number(document.getElementById("hours").value);
   const wage = Number(document.getElementById("wage").value);
 
   const salary = days * hours * wage;
 
   document.getElementById("result").textContent =
-    `給料は ${salary.toLocaleString()}円です！`;
+    `今月のバイト日数：${days}日\n給料は ${salary.toLocaleString()}円です！`;
 }
