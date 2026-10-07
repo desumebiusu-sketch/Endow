@@ -191,3 +191,24 @@ function calculateSalary() {
   document.getElementById("result").textContent =
     `今月のバイト日数：${days}日\n給料は ${salary.toLocaleString()}円です！`;
 }
+// ====================
+// 画面切り替え
+// ====================
+
+const calendarButton = document.getElementById("calendar-button");
+const todoButton = document.getElementById("todo-button");
+
+const calendarScreen = document.getElementById("calendar-screen");
+const todoScreen = document.getElementById("todo-screen");
+
+// カレンダーを表示
+calendarButton.addEventListener("click", function() {
+  calendarScreen.style.display = "block";
+  todoScreen.style.display = "none";
+});
+
+// ToDoリストを表示
+todoButton.addEventListener("click", function() {
+  calendarScreen.style.display = "none";
+  todoScreen.style.display = "block";
+});
