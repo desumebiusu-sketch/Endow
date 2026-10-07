@@ -217,6 +217,7 @@ todoButton.addEventListener("click", function() {
 // ====================
 
 const todoInput = document.getElementById("todo-input");
+const todoDate = document.getElementById("todo-date");
 const addTodoButton = document.getElementById("add-todo");
 const todoList = document.getElementById("todo-list");
 
@@ -244,6 +245,15 @@ function renderTodos() {
       todoTextElement.classList.add("completed");
     }
 
+    // 日付
+    const dateElement = document.createElement("span");
+
+    if (todo.date) {
+      dateElement.textContent = "📅 " + todo.date;
+    } else {
+      dateElement.textContent = "📅 日付なし";
+    }
+
     // 完了ボタン
     const completeButton = document.createElement("button");
     completeButton.textContent = "☑ 完了";
@@ -267,6 +277,7 @@ function renderTodos() {
     });
 
     listItem.appendChild(todoTextElement);
+    listItem.appendChild(dateElement);
     listItem.appendChild(completeButton);
     listItem.appendChild(deleteButton);
 
@@ -277,15 +288,17 @@ function renderTodos() {
 // ToDoを追加
 addTodoButton.addEventListener("click", function() {
 
-  const todoText = todoInput.value.trim();
+  const todoTextValue = todoInput.value.trim();
+  const todoDateValue = todoDate.value;
 
-  if (!todoText) {
+  if (!todoTextValue) {
     alert("ToDoを入力してください");
     return;
   }
 
   todos.push({
-    text: todoText,
+    text: todoTextValue,
+    date: todoDateValue,
     completed: false
   });
 
@@ -293,6 +306,7 @@ addTodoButton.addEventListener("click", function() {
   renderTodos();
 
   todoInput.value = "";
+  todoDate.value = "";
 });
 
 // 最初にToDoを表示
