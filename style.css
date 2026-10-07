@@ -138,3 +138,62 @@ h1 {
 .delete-event:hover {
   color: red;
 }
+/* ToDoリスト */
+
+#todo-screen {
+  max-width: 600px;
+  margin: 30px auto;
+}
+
+.todo-container {
+  padding: 20px;
+  background: white;
+  border-radius: 10px;
+}
+
+.todo-form {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+#todo-input {
+  flex: 1;
+  padding: 10px;
+  font-size: 16px;
+}
+
+#add-todo {
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+#todo-list {
+  list-style: none;
+  padding: 0;
+}
+
+#todo-list li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+#todo-list li span {
+  flex: 1;
+}
+
+/* 完了したToDo */
+#todo-list li span.completed {
+  text-decoration: line-through;
+  color: gray;
+}
+
+#todo-list button {
+  padding: 6px 10px;
+  cursor: pointer;
+}
