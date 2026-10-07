@@ -3,69 +3,124 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>カレンダー</title>
+  <title>Endow</title>
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-  <h1>カレンダー</h1>
+  <h1>Endow</h1>
 
-  <div class="calendar">
-
-    <div class="calendar-header">
-      <div class="event-form">
-  <h3>予定を追加</h3>
-
-  <input type="date" id="event-date">
-
-  <input
-    type="text"
-    id="event-title"
-    placeholder="予定を入力してください"
-  >
-
-  <button id="add-event">追加</button>
-  <button id="add-work-button">バイトを追加</button>
-</div>
-      <button id="prev">◀</button>
-      <h2 id="month-year"></h2>
-      <button id="next">▶</button>
-    </div>
-
-    <div class="weekdays">
-      <div>日</div>
-      <div>月</div>
-      <div>火</div>
-      <div>水</div>
-      <div>木</div>
-      <div>金</div>
-      <div>土</div>
-    </div>
-
-    <div id="calendar-days" class="calendar-days"></div>
-<div class="salary-calculator">
-  <h2>💰 バイト代計算</h2>
-
-  <p>今月のバイト日数はカレンダーから自動で計算されます。</p>
-
-  <label>
-    1日の勤務時間
-    <input type="number" id="hours" placeholder="例：5">
-    時間
-  </label>
-
-  <label>
-    時給
-    <input type="number" id="wage" placeholder="例：1200">
-    円
-  </label>
-
-  <button onclick="calculateSalary()">計算する</button>
-
-  <h3 id="result">ここに給料が表示されます</h3>
-</div>
+  <!-- 画面切り替えボタン -->
+  <div class="menu-buttons">
+    <button id="calendar-button">📅 カレンダー</button>
+    <button id="todo-button">✅ ToDoリスト</button>
   </div>
-<script src="script.js"></script>
+
+  <!-- ==================== -->
+  <!-- カレンダー画面 -->
+  <!-- ==================== -->
+
+  <div id="calendar-screen">
+
+    <div class="calendar">
+
+      <div class="calendar-header">
+
+        <div class="event-form">
+          <h3>予定を追加</h3>
+
+          <input type="date" id="event-date">
+
+          <input
+            type="text"
+            id="event-title"
+            placeholder="予定を入力してください"
+          >
+
+          <button id="add-event">追加</button>
+          <button id="add-work-button">バイトを追加</button>
+        </div>
+
+        <button id="prev">◀</button>
+        <h2 id="month-year"></h2>
+        <button id="next">▶</button>
+
+      </div>
+
+      <div class="weekdays">
+        <div>日</div>
+        <div>月</div>
+        <div>火</div>
+        <div>水</div>
+        <div>木</div>
+        <div>金</div>
+        <div>土</div>
+      </div>
+
+      <div id="calendar-days" class="calendar-days"></div>
+
+      <div class="salary-calculator">
+
+        <h2>💰 バイト代計算</h2>
+
+        <p>
+          今月のバイト日数はカレンダーから自動で計算されます。
+        </p>
+
+        <label>
+          1日の勤務時間
+          <input type="number" id="hours" placeholder="例：5">
+          時間
+        </label>
+
+        <label>
+          時給
+          <input type="number" id="wage" placeholder="例：1200">
+          円
+        </label>
+
+        <button onclick="calculateSalary()">計算する</button>
+
+        <h3 id="result">ここに給料が表示されます</h3>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- ==================== -->
+  <!-- ToDoリスト画面 -->
+  <!-- ==================== -->
+
+  <div id="todo-screen" style="display: none;">
+
+    <div class="todo-container">
+
+      <h2>✅ ToDoリスト</h2>
+
+      <div class="todo-form">
+
+        <input
+          type="text"
+          id="todo-input"
+          placeholder="やることを入力してください"
+        >
+
+        <button id="add-todo">追加</button>
+
+      </div>
+
+      <ul id="todo-list"></ul>
+
+    </div>
+
+  </div>
+
+
+  <script src="script.js"></script>
+
 </body>
 </html>
