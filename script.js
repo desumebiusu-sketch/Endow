@@ -232,7 +232,29 @@ addTodoButton.addEventListener("click", function() {
 
   const listItem = document.createElement("li");
 
-  listItem.textContent = todoText;
+  // ToDoの文字
+  const todoTextElement = document.createElement("span");
+  todoTextElement.textContent = todoText;
+
+  // 完了ボタン
+  const completeButton = document.createElement("button");
+  completeButton.textContent = "☑ 完了";
+
+  completeButton.addEventListener("click", function() {
+    todoTextElement.classList.toggle("completed");
+  });
+
+  // 削除ボタン
+  const deleteButton = document.createElement("button");
+  deleteButton.textContent = "🗑 削除";
+
+  deleteButton.addEventListener("click", function() {
+    listItem.remove();
+  });
+
+  listItem.appendChild(todoTextElement);
+  listItem.appendChild(completeButton);
+  listItem.appendChild(deleteButton);
 
   todoList.appendChild(listItem);
 
