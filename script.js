@@ -220,6 +220,60 @@ const todoInput = document.getElementById("todo-input");
 const addTodoButton = document.getElementById("add-todo");
 const todoList = document.getElementById("todo-list");
 
+// 保存されているToDoを読み込む
+let todos = JSON.parse(localStorage.getItem("endow-todos")) || [];
+
+// ToDoを保存する
+function saveTodos() {
+  localStorage.setItem("endow-todos", JSON.stringify(todos));
+}
+
+// ToDoを表示する
+function renderTodos() {
+  todoList.innerHTML = "";
+
+  todos.forEach((todo, index) => {
+
+    const listItem = document.createElement("li");
+
+    // ToDoの文字
+    const todoTextElement = document.createElement("span");
+    todoTextElement.textContent = todo.text;
+
+    if (todo.completed) {
+      todoTextElement.classList.add("completed");
+    }
+
+    // 完了ボタン
+    const completeButton = document.createElement("button");
+    completeButton.textContent = "☑ 完了";
+
+    completeButton.addEventListener("click", function() {
+      todos[index].completed = !todos[index].completed;
+
+      saveTodos();
+      renderTodos();
+    });
+
+    // 削除ボタン
+    const deleteButton = document.createElement("button");
+    deleteButton.textContent = "🗑 削除";
+
+    deleteButton.addEventListener("click", function() {
+      todos.splice(index, 1);
+
+      saveTodos();
+      renderTodos();
+    });
+
+    listItem.appendChild(todoTextElement);
+    listItem.appendChild(completeButton);
+    listItem.appendChild(deleteButton);
+
+    todoList.appendChild(listItem);
+  });
+}
+
 // ToDoを追加
 addTodoButton.addEventListener("click", function() {
 
@@ -230,33 +284,16 @@ addTodoButton.addEventListener("click", function() {
     return;
   }
 
-  const listItem = document.createElement("li");
-
-  // ToDoの文字
-  const todoTextElement = document.createElement("span");
-  todoTextElement.textContent = todoText;
-
-  // 完了ボタン
-  const completeButton = document.createElement("button");
-  completeButton.textContent = "☑ 完了";
-
-  completeButton.addEventListener("click", function() {
-    todoTextElement.classList.toggle("completed");
+  todos.push({
+    text: todoText,
+    completed: false
   });
 
-  // 削除ボタン
-  const deleteButton = document.createElement("button");
-  deleteButton.textContent = "🗑 削除";
-
-  deleteButton.addEventListener("click", function() {
-    listItem.remove();
-  });
-
-  listItem.appendChild(todoTextElement);
-  listItem.appendChild(completeButton);
-  listItem.appendChild(deleteButton);
-
-  todoList.appendChild(listItem);
+  saveTodos();
+  renderTodos();
 
   todoInput.value = "";
 });
+
+// 最初にToDoを表示
+renderTodos();
