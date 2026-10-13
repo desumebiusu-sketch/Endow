@@ -390,3 +390,93 @@ worklogButton.addEventListener("click", function() {
   todoScreen.style.display = "none";
   worklogScreen.style.display = "block";
 });
+
+
+/* ====================
+   バイト記録の保存・表示
+==================== */
+
+const worklogDate = document.getElementById("worklog-date");
+const worklogStart = document.getElementById("worklog-start");
+const worklogEnd = document.getElementById("worklog-end");
+const addWorklogButton = document.getElementById("add-worklog");
+const worklogList = document.getElementById("worklog-list");
+
+// 保存済みの勤務記録を読み込む
+let worklogs = JSON.parse(localStorage.getItem("endow-worklogs")) || [];
+
+// 勤務記録を保存する
+function saveWorklogs() {
+  localStorage.setItem("endow-worklogs", JSON.stringify(worklogs));
+}
+
+// 勤務時間を計算して一覧に表示する
+function renderWorklogs() {
+  worklogList.innerHTML = "";
+
+  worklogs.forEach((worklog, index) => {
+    const item = document.createElement("li");
+
+    const startMinutes =
+      Number(worklog.start.split(":")[0]) * 60 +
+      Number(worklog.start.split(":")[1]);
+
+    const endMinutes =
+      Number(worklog.end.split(":")[0]) * 60 +
+      Number(worklog.end.split(":")[1]);
+
+    // 日付をまたぐ勤務にも対応
+    let minutes = endMinutes - startMinutes;
+    if (minutes < 0) minutes += 24 * 60;
+
+    const hours = minutes / 60;
+
+    const text = document.createElement("span");
+    text.textContent =
+      `${worklog.date}　${worklog.start}〜${worklog.end}　勤務時間：${hours}時間`;
+
+    const deleteButton = document.createElement("button");
+    deleteButton.textContent = "削除";
+
+    deleteButton.addEventListener("click", function() {
+      worklogs.splice(index, 1);
+      saveWorklogs();
+      renderWorklogs();
+    });
+
+    item.appendChild(text);
+    item.appendChild(deleteButton);
+    worklogList.appendChild(item);
+  });
+}
+
+// 勤務記録を追加する
+addWorklogButton.addEventListener("click", function() {
+  const date = worklogDate.value;
+  const start = worklogStart.value;
+  const end = worklogEnd.value;
+
+  if (!date || !start || !end) {
+    alert("勤務日、開始時間、終了時間を入力してください");
+    return;
+  }
+
+  if (start === end) {
+    alert("開始時間と終了時間を確認してください");
+    return;
+  }
+
+  worklogs.push({
+    date: date,
+    start: start,
+    end: end
+  });
+
+  saveWorklogs();
+  renderWorklogs();
+
+  alert("勤務記録を保存しました！");
+});
+
+// 保存済みの記録を表示
+renderWorklogs();
