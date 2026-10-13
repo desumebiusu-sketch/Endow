@@ -187,7 +187,12 @@ addWorkButton.addEventListener("click", () => {
     events[date] = [];
   }
 
-  events[date].push({ title: "バイト", hours: 5 });
+  const hoursInput = Number(document.getElementById("hours").value);
+
+events[date].push({
+  title: "バイト",
+  hours: hoursInput
+});
   saveEvents();
   renderCalendar();
 
