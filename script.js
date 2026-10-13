@@ -10,7 +10,22 @@ const addWorkButton = document.getElementById("add-work-button");
 
 let currentDate = new Date();
 
+
 let events = JSON.parse(localStorage.getItem("endow-events")) || {};
+
+// 古い予定データを新しい形式に変換する
+Object.keys(events).forEach(dateKey => {
+  events[dateKey] = events[dateKey].map(event => {
+    if (typeof event === "string") {
+      return {
+        title: event,
+        hours: event === "バイト" ? 5 : null
+      };
+    }
+    return event;
+  });
+});
+
 
 function saveEvents() {
   localStorage.setItem("endow-events", JSON.stringify(events));
@@ -47,6 +62,7 @@ function renderCalendar() {
     numberElement.textContent = day;
     dayElement.appendChild(numberElement);
 
+    
     // 予定がある場合だけ表示する
     if (events[dateKey]) {
       events[dateKey].forEach((event, index) => {
@@ -55,18 +71,53 @@ function renderCalendar() {
 
         // 予定の文字
         const eventText = document.createElement("span");
-        eventText.textContent = event;
+        eventText.textContent = event.title;
+
+        eventElement.appendChild(eventText);
+
+        // バイトの場合は勤務時間の変更ボタンを表示
+        if (event.title === "バイト") {
+          const hoursText = document.createElement("span");
+          hoursText.textContent = ` ${event.hours}時間 `;
+          eventElement.appendChild(hoursText);
+
+          // －ボタン
+          const minusButton = document.createElement("button");
+          minusButton.textContent = "−";
+          minusButton.addEventListener("click", (e) => {
+            e.stopPropagation();
+
+            if (event.hours > 0) {
+              event.hours--;
+              saveEvents();
+              renderCalendar();
+            }
+          });
+
+          // ＋ボタン
+          const plusButton = document.createElement("button");
+          plusButton.textContent = "＋";
+          plusButton.addEventListener("click", (e) => {
+            e.stopPropagation();
+
+            event.hours++;
+            saveEvents();
+            renderCalendar();
+          });
+
+          eventElement.appendChild(minusButton);
+          eventElement.appendChild(plusButton);
+        }
 
         // ×ボタン
         const deleteButton = document.createElement("button");
         deleteButton.textContent = "×";
         deleteButton.classList.add("delete-event");
 
-        // ×ボタンを押したとき
         deleteButton.addEventListener("click", (e) => {
           e.stopPropagation();
 
-          if (confirm(`「${event}」を削除しますか？`)) {
+          if (confirm(`「${event.title}」を削除しますか？`)) {
             events[dateKey].splice(index, 1);
 
             if (events[dateKey].length === 0) {
@@ -78,9 +129,7 @@ function renderCalendar() {
           }
         });
 
-        eventElement.appendChild(eventText);
         eventElement.appendChild(deleteButton);
-
         dayElement.appendChild(eventElement);
       });
     }
@@ -89,6 +138,7 @@ function renderCalendar() {
     dayElement.addEventListener("click", () => {
       eventDate.value = dateKey;
     });
+
 
     calendarDays.appendChild(dayElement);
   }
@@ -113,7 +163,7 @@ addEventButton.addEventListener("click", () => {
     events[date] = [];
   }
 
-  events[date].push(title);
+ events[date].push({ title: title, hours: null });
 
   saveEvents();
 
@@ -137,8 +187,7 @@ addWorkButton.addEventListener("click", () => {
     events[date] = [];
   }
 
-  events[date].push("バイト");
-
+  events[date].push({ title: "バイト", hours: 5 });
   saveEvents();
   renderCalendar();
 
@@ -161,11 +210,13 @@ nextButton.addEventListener("click", () => {
 renderCalendar();
 
 // 給料計算
+
 function calculateSalary() {
   const year = currentDate.getFullYear();
   const month = currentDate.getMonth() + 1;
 
   let days = 0;
+  let totalHours = 0;
 
   // 今表示している月のバイトだけを数える
   Object.keys(events).forEach(dateKey => {
@@ -176,21 +227,23 @@ function calculateSalary() {
       Number(eventMonth) === month
     ) {
       events[dateKey].forEach(event => {
-        if (event === "バイト") {
+        if (event.title === "バイト") {
           days++;
+          totalHours += event.hours;
         }
       });
     }
   });
 
-  const hours = Number(document.getElementById("hours").value);
   const wage = Number(document.getElementById("wage").value);
-
-  const salary = days * hours * wage;
+  const salary = totalHours * wage;
 
   document.getElementById("result").textContent =
-    `今月のバイト日数：${days}日\n給料は ${salary.toLocaleString()}円です！`;
+    `今月のバイト日数：${days}日\n` +
+    `今月の勤務時間：${totalHours}時間\n` +
+    `給料は ${salary.toLocaleString()}円です！`;
 }
+
 // ====================
 // 画面切り替え
 // ====================
