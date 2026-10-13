@@ -480,3 +480,58 @@ addWorklogButton.addEventListener("click", function() {
 
 // 保存済みの記録を表示
 renderWorklogs();
+
+
+/* ====================
+   バイト記録から給料を計算
+==================== */
+
+const worklogWage = document.getElementById("worklog-wage");
+const calculateWorklogSalaryButton =
+  document.getElementById("calculate-worklog-salary");
+const worklogSalaryResult =
+  document.getElementById("worklog-salary-result");
+
+calculateWorklogSalaryButton.addEventListener("click", function() {
+  const year = currentDate.getFullYear();
+  const month = currentDate.getMonth() + 1;
+  const wage = Number(worklogWage.value);
+
+  if (worklogWage.value === "" || wage < 0 || !Number.isFinite(wage)) {
+    alert("正しい時給を入力してください");
+    return;
+  }
+
+  let totalMinutes = 0;
+  let days = 0;
+
+  worklogs.forEach(worklog => {
+    const [workYear, workMonth] = worklog.date.split("-").map(Number);
+
+    // 今表示している月の勤務記録だけ集計
+    if (workYear === year && workMonth === month) {
+      const [startHour, startMinute] = worklog.start.split(":").map(Number);
+      const [endHour, endMinute] = worklog.end.split(":").map(Number);
+
+      const start = startHour * 60 + startMinute;
+      let end = endHour * 60 + endMinute;
+
+      // 日付をまたぐ勤務にも対応
+      if (end < start) {
+        end += 24 * 60;
+      }
+
+      totalMinutes += end - start;
+      days++;
+    }
+  });
+
+  const totalHours = totalMinutes / 60;
+  const salary = Math.floor(totalHours * wage);
+
+  worklogSalaryResult.textContent =
+    `${year}年${month}月の勤務日数：${days}日 / ` +
+    `勤務時間：${totalHours.toLocaleString("ja-JP", {
+      maximumFractionDigits: 2
+    })}時間 / 給料：${salary.toLocaleString()}円`;
+});

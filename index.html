@@ -151,6 +151,26 @@
 
     <h3>勤務記録一覧</h3>
     <ul id="worklog-list"></ul>
+    
+<div class="worklog-salary">
+  <h2>💰 バイト代計算</h2>
+
+  <label for="worklog-wage">時給（円）</label>
+  <input
+    type="number"
+    id="worklog-wage"
+    placeholder="例：1200"
+    value="1200"
+    min="0"
+  >
+
+  <button id="calculate-worklog-salary">給料を計算する</button>
+
+  <h3 id="worklog-salary-result">
+    ここに今月の給料が表示されます
+  </h3>
+</div>
+
   </div>
 
 </div>
