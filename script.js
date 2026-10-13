@@ -364,3 +364,29 @@ addTodoButton.addEventListener("click", function() {
 
 // 最初にToDoを表示
 renderTodos();
+
+
+/* ====================
+   バイト記録画面の切り替え
+==================== */
+
+const worklogButton = document.getElementById("worklog-button");
+const worklogScreen = document.getElementById("worklog-screen");
+
+calendarButton.addEventListener("click", function() {
+  calendarScreen.style.display = "block";
+  todoScreen.style.display = "none";
+  worklogScreen.style.display = "none";
+});
+
+todoButton.addEventListener("click", function() {
+  calendarScreen.style.display = "none";
+  todoScreen.style.display = "block";
+  worklogScreen.style.display = "none";
+});
+
+worklogButton.addEventListener("click", function() {
+  calendarScreen.style.display = "none";
+  todoScreen.style.display = "none";
+  worklogScreen.style.display = "block";
+});
