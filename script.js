@@ -572,3 +572,146 @@ worklogButton.addEventListener("click", function() {
 savingsButton.addEventListener("click", function() {
   showScreen(savingsScreen);
 });
+
+// ====================
+// 貯金・目標の登録と保存
+// ====================
+
+const savingsGoalName = document.getElementById("savings-goal-name");
+const savingsGoalAmount = document.getElementById("savings-goal-amount");
+const addSavingsGoalButton = document.getElementById("add-savings-goal");
+const savingsGoalList = document.getElementById("savings-goal-list");
+
+// 保存済みの目標を読み込む
+let savingsGoals = JSON.parse(
+  localStorage.getItem("endow-savings-goals") || "[]"
+);
+
+// 目標を保存する
+function saveSavingsGoals() {
+  localStorage.setItem(
+    "endow-savings-goals",
+    JSON.stringify(savingsGoals)
+  );
+}
+
+// 目標一覧を表示する
+function renderSavingsGoals() {
+  savingsGoalList.innerHTML = "";
+
+  savingsGoals.forEach((goal, index) => {
+    const card = document.createElement("div");
+    card.style.cssText =
+      "background:#f4f7fb;padding:16px;margin:12px 0;border-radius:10px;";
+
+    const title = document.createElement("h3");
+    title.textContent = goal.name;
+
+    const amount = document.createElement("p");
+    amount.textContent =
+      "貯金額：" + goal.saved.toLocaleString() + "円 / 目標：" +
+      goal.target.toLocaleString() + "円";
+
+    const rate = Math.floor(goal.saved / goal.target * 100);
+    const progress = Math.min(100, rate);
+
+    const progressBar = document.createElement("div");
+    progressBar.style.cssText =
+      "background:#ddd;height:16px;border-radius:10px;overflow:hidden;";
+
+    const progressFill = document.createElement("div");
+    progressFill.style.cssText =
+      "background:#36ad72;height:16px;width:" + progress + "%;";
+
+    progressBar.appendChild(progressFill);
+
+    const rateText = document.createElement("p");
+    rateText.textContent = "達成率：" + rate + "%";
+
+    const remaining = document.createElement("p");
+    remaining.textContent =
+      goal.saved >= goal.target
+        ? "🎉 目標達成！"
+        : "残り：" + (goal.target - goal.saved).toLocaleString() + "円";
+
+    const savingInput = document.createElement("input");
+    savingInput.type = "number";
+    savingInput.min = "1";
+    savingInput.placeholder = "追加する貯金額（円）";
+
+    const addSavingButton = document.createElement("button");
+    addSavingButton.textContent = "貯金を追加";
+
+    addSavingButton.addEventListener("click", function() {
+      const value = Number(savingInput.value);
+
+      if (savingInput.value.trim() === "" ||
+          !Number.isFinite(value) || value <= 0) {
+        alert("追加する貯金額を正しく入力してください");
+        return;
+      }
+
+      savingsGoals[index].saved += value;
+
+      saveSavingsGoals();
+      renderSavingsGoals();
+    });
+
+    const deleteButton = document.createElement("button");
+    deleteButton.textContent = "目標を削除";
+
+    deleteButton.addEventListener("click", function() {
+      if (confirm("「" + goal.name + "」を削除しますか？")) {
+        savingsGoals.splice(index, 1);
+        saveSavingsGoals();
+        renderSavingsGoals();
+      }
+    });
+
+    card.appendChild(title);
+    card.appendChild(amount);
+    card.appendChild(progressBar);
+    card.appendChild(rateText);
+    card.appendChild(remaining);
+    card.appendChild(savingInput);
+    card.appendChild(addSavingButton);
+    card.appendChild(document.createElement("br"));
+    card.appendChild(deleteButton);
+
+    savingsGoalList.appendChild(card);
+  });
+}
+
+// 新しい目標を登録する
+addSavingsGoalButton.addEventListener("click", function() {
+  const name = savingsGoalName.value.trim();
+  const target = Number(savingsGoalAmount.value);
+
+  if (!name) {
+    alert("目標名を入力してください");
+    return;
+  }
+
+  if (savingsGoalAmount.value.trim() === "" ||
+      !Number.isFinite(target) || target <= 0) {
+    alert("目標金額を正しく入力してください");
+    return;
+  }
+
+  savingsGoals.push({
+    name: name,
+    target: target,
+    saved: 0
+  });
+
+  saveSavingsGoals();
+  renderSavingsGoals();
+
+  savingsGoalName.value = "";
+  savingsGoalAmount.value = "";
+
+  alert("目標を登録しました！");
+});
+
+// 保存済みの目標を最初に表示する
+renderSavingsGoals();
