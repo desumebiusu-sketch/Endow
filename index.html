@@ -126,7 +126,42 @@
     </div>
 
   </div>
+  <!-- ==================== -->
+  <!-- 貯金・目標画面 -->
+  <!-- ==================== -->
 
+  <div id="savings-screen" style="display: none;">
+
+    <div class="todo-container">
+
+      <h2>💰 貯金・目標管理</h2>
+
+      <h3>🎯 目標を登録</h3>
+
+      <div class="todo-form">
+        <input
+          type="text"
+          id="savings-goal-name"
+          placeholder="目標名（例：旅行）"
+        >
+
+        <input
+          type="number"
+          id="savings-goal-amount"
+          placeholder="目標金額（円）"
+          min="1"
+        >
+
+        <button id="add-savings-goal">目標を追加</button>
+      </div>
+
+      <h3>📋 目標一覧</h3>
+
+      <div id="savings-goal-list"></div>
+
+    </div>
+
+  </div>
 
 <!-- ==================== -->
 <!-- バイト記録画面 -->
