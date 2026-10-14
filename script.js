@@ -540,3 +540,35 @@ calculateWorklogSalaryButton.addEventListener("click", function() {
       maximumFractionDigits: 2
     })}時間 / 給料：${salary.toLocaleString()}円`;
 });
+
+// ====================
+// 貯金・目標画面の切り替え
+// ====================
+
+const savingsButton = document.getElementById("savings-button");
+const savingsScreen = document.getElementById("savings-screen");
+
+function showScreen(screen) {
+  calendarScreen.style.display = "none";
+  todoScreen.style.display = "none";
+  worklogScreen.style.display = "none";
+  savingsScreen.style.display = "none";
+
+  screen.style.display = "block";
+}
+
+calendarButton.addEventListener("click", function() {
+  showScreen(calendarScreen);
+});
+
+todoButton.addEventListener("click", function() {
+  showScreen(todoScreen);
+});
+
+worklogButton.addEventListener("click", function() {
+  showScreen(worklogScreen);
+});
+
+savingsButton.addEventListener("click", function() {
+  showScreen(savingsScreen);
+});
