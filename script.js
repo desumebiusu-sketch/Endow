@@ -655,6 +655,7 @@ function renderSavingsGoals() {
 
       saveSavingsGoals();
       renderSavingsGoals();
+      renderSettlementSavings();
     });
 
     const deleteButton = document.createElement("button");
@@ -907,3 +908,29 @@ saveSettlementButton.addEventListener("click", saveMonthlyReview);
 
 // 最初に表示
 loadMonthlyReview();
+
+
+// ====================
+// 精算画面の合計貯金表示
+// ====================
+
+function renderSettlementSavings() {
+  const totalSaved = savingsGoals.reduce(
+    (sum, goal) => sum + Number(goal.saved || 0),
+    0
+  );
+
+  const totalTarget = savingsGoals.reduce(
+    (sum, goal) => sum + Number(goal.target || 0),
+    0
+  );
+
+  document.getElementById("settlement-total-saved").textContent =
+    totalSaved.toLocaleString() + "円";
+
+  document.getElementById("settlement-total-target").textContent =
+    "合計目標金額：" + totalTarget.toLocaleString() + "円";
+}
+
+// 最初に表示
+renderSettlementSavings();
