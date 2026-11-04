@@ -801,3 +801,58 @@ monthlyExpense.addEventListener("input", calculateMonthlyBalance);
 
 // 初期表示
 renderSettlement();
+
+
+// ====================
+// 月別精算データの保存
+// ====================
+
+let settlementData = JSON.parse(
+  localStorage.getItem("endow-settlements") || "{}"
+);
+
+// 月別データを保存
+function saveSettlement() {
+  const month = settlementMonth.value;
+
+  if (!month) {
+    alert("対象月を選択してください");
+    return;
+  }
+
+  settlementData[month] = {
+    saving: Number(monthlySaving.value) || 0,
+    expense: Number(monthlyExpense.value) || 0
+  };
+
+  localStorage.setItem(
+    "endow-settlements",
+    JSON.stringify(settlementData)
+  );
+
+  alert("精算内容を保存しました！");
+}
+
+// 月を選択したとき保存済みデータを読み込む
+function loadSettlement() {
+  const month = settlementMonth.value;
+
+  const data = settlementData[month] || {
+    saving: 0,
+    expense: 0
+  };
+
+  monthlySaving.value = data.saving;
+  monthlyExpense.value = data.expense;
+
+  renderSettlement();
+}
+
+// 保存ボタン
+saveSettlementButton.addEventListener("click", saveSettlement);
+
+// 月を変更したとき保存データを読み込む
+settlementMonth.addEventListener("change", loadSettlement);
+
+// 最初に保存済みデータを読み込む
+loadSettlement();
