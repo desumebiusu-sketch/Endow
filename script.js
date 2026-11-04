@@ -784,10 +784,22 @@ function calculateMonthlyBalance() {
   const saving = Number(monthlySaving.value) || 0;
   const expense = Number(monthlyExpense.value) || 0;
 
-  const balance = salary - saving - expense;
+  // 現在の合計貯金額を取得
+  const totalSaved = savingsGoals.reduce(
+    (sum, goal) => sum + Number(goal.saved || 0), 0
+  );
+
+  // 貯金＋今月の給料
+  const totalMoney = totalSaved + salary;
+
+  // 今月の給料－支出
+  const balance = salary - expense;
+
+  document.getElementById("total-money-display").textContent =
+    totalMoney.toLocaleString() + "円";
 
   monthlyBalance.textContent =
-    `残ったお金：${balance.toLocaleString()}円`;
+    balance.toLocaleString() + "円";
 }
 
 // 月を変更したら再計算
