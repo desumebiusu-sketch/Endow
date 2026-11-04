@@ -715,3 +715,89 @@ addSavingsGoalButton.addEventListener("click", function() {
 
 // 保存済みの目標を最初に表示する
 renderSavingsGoals();
+
+
+// ====================
+// 月間精算・勤務時間の自動集計
+// ====================
+
+const settlementMonth = document.getElementById("settlement-month");
+const monthlyWorkSummary = document.getElementById("monthly-work-summary");
+const monthlySaving = document.getElementById("monthly-saving");
+const monthlyExpense = document.getElementById("monthly-expense");
+const monthlyBalance = document.getElementById("monthly-balance");
+const saveSettlementButton = document.getElementById("save-settlement");
+
+// 初期表示は今月
+settlementMonth.value =
+  `${currentDate.getFullYear()}-${String(currentDate.getMonth() + 1).padStart(2, "0")}`;
+
+// 勤務時間と給料を集計
+function renderSettlement() {
+  const [year, month] = settlementMonth.value.split("-").map(Number);
+
+  if (!year || !month) return;
+
+  let totalMinutes = 0;
+  let days = 0;
+
+  worklogs.forEach(worklog => {
+    const [workYear, workMonth] = worklog.date.split("-").map(Number);
+
+    if (workYear === year && workMonth === month) {
+      const [startHour, startMinute] = worklog.start.split(":").map(Number);
+      const [endHour, endMinute] = worklog.end.split(":").map(Number);
+
+      let start = startHour * 60 + startMinute;
+      let end = endHour * 60 + endMinute;
+
+      if (end < start) end += 24 * 60;
+
+      totalMinutes += end - start;
+      days++;
+    }
+  });
+
+  const totalHours = totalMinutes / 60;
+  const wage = Number(worklogWage.value) || 0;
+  const salary = Math.floor(totalHours * wage);
+
+  monthlyWorkSummary.innerHTML = `
+    <p>バイト日数：${days}日</p>
+    <p>合計勤務時間：${totalHours.toLocaleString("ja-JP", {
+      maximumFractionDigits: 2
+    })}時間</p>
+    <p>今月の給料：${salary.toLocaleString()}円</p>
+  `;
+
+  calculateMonthlyBalance();
+}
+
+// 残ったお金を計算
+function calculateMonthlyBalance() {
+  const salaryText = monthlyWorkSummary.textContent.match(/今月の給料：([\d,]+)円/);
+  const salary = salaryText
+    ? Number(salaryText[1].replace(/,/g, ""))
+    : 0;
+
+  const saving = Number(monthlySaving.value) || 0;
+  const expense = Number(monthlyExpense.value) || 0;
+
+  const balance = salary - saving - expense;
+
+  monthlyBalance.textContent =
+    `残ったお金：${balance.toLocaleString()}円`;
+}
+
+// 月を変更したら再計算
+settlementMonth.addEventListener("change", renderSettlement);
+
+// 時給を変更したら再計算
+worklogWage.addEventListener("input", renderSettlement);
+
+// 貯金・支出を変更したら再計算
+monthlySaving.addEventListener("input", calculateMonthlyBalance);
+monthlyExpense.addEventListener("input", calculateMonthlyBalance);
+
+// 初期表示
+renderSettlement();
