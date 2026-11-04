@@ -727,6 +727,7 @@ const monthlyWorkSummary = document.getElementById("monthly-work-summary");
 const monthlySaving = document.getElementById("monthly-saving");
 const monthlyExpense = document.getElementById("monthly-expense");
 const monthlyBalance = document.getElementById("monthly-balance");
+const totalSavedInput = document.getElementById("total-saved-input");
 const saveSettlementButton = document.getElementById("save-settlement");
 
 // 初期表示は今月
