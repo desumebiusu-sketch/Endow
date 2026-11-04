@@ -197,3 +197,28 @@ h1 {
   padding: 6px 10px;
   cursor: pointer;
 }
+
+
+/* ====================
+   精算画面の残高表示
+==================== */
+
+.monthly-balance-card {
+  background: linear-gradient(135deg, #246b50, #38a879);
+  color: white;
+  padding: 30px 20px;
+  margin: 25px 0;
+  border-radius: 18px;
+  text-align: center;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+.monthly-balance-card p {
+  margin: 8px 0;
+}
+
+.monthly-balance-card h1 {
+  font-size: 42px;
+  margin: 15px 0;
+  color: white;
+}
