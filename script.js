@@ -856,3 +856,54 @@ settlementMonth.addEventListener("change", loadSettlement);
 
 // 最初に保存済みデータを読み込む
 loadSettlement();
+
+
+// ====================
+// 月間振り返りの保存
+// ====================
+
+const monthlyGood = document.getElementById("monthly-good");
+const monthlyImprovement = document.getElementById("monthly-improvement");
+const monthlyComment = document.getElementById("monthly-comment");
+
+// 保存済みの振り返りを読み込む
+let monthlyReviews = JSON.parse(
+  localStorage.getItem("endow-monthly-reviews") || "{}"
+);
+
+// 振り返りを保存
+function saveMonthlyReview() {
+  const month = settlementMonth.value;
+
+  if (!month) return;
+
+  monthlyReviews[month] = {
+    good: monthlyGood.value,
+    improvement: monthlyImprovement.value,
+    comment: monthlyComment.value
+  };
+
+  localStorage.setItem(
+    "endow-monthly-reviews",
+    JSON.stringify(monthlyReviews)
+  );
+}
+
+// 選択した月の振り返りを表示
+function loadMonthlyReview() {
+  const month = settlementMonth.value;
+  const review = monthlyReviews[month] || {};
+
+  monthlyGood.value = review.good || "";
+  monthlyImprovement.value = review.improvement || "";
+  monthlyComment.value = review.comment || "";
+}
+
+// 月が変わったら振り返りも切り替える
+settlementMonth.addEventListener("change", loadMonthlyReview);
+
+// 精算保存ボタンで振り返りも保存
+saveSettlementButton.addEventListener("click", saveMonthlyReview);
+
+// 最初に表示
+loadMonthlyReview();
