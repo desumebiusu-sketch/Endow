@@ -171,6 +171,43 @@
 
   <div class="todo-container">
     <h2>💰 月間精算・振り返り</h2>
+    
+<!-- 月間精算 -->
+<div class="monthly-settlement">
+
+  <h2>📊 月間勤務まとめ</h2>
+
+  <label for="settlement-month">対象月</label>
+  <input type="month" id="settlement-month">
+
+  <div id="monthly-work-summary">
+
+    <p>バイト日数：集計中</p>
+    <p>合計勤務時間：集計中</p>
+    <p>今月の給料：集計中</p>
+
+  </div>
+
+  <hr>
+
+  <h2>💰 今月のお金の精算</h2>
+
+  <label>
+    今月の貯金額（円）
+    <input type="number" id="monthly-saving" min="0" placeholder="例：20000">
+  </label>
+
+  <label>
+    今月の支出（円）
+    <input type="number" id="monthly-expense" min="0" placeholder="例：10000">
+  </label>
+
+  <h3 id="monthly-balance">残ったお金：0円</h3>
+
+  <button id="save-settlement">精算内容を保存</button>
+
+</div>
+
 
     <div class="todo-form">
       <label for="worklog-date">勤務日</label>
