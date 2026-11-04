@@ -786,9 +786,7 @@ function calculateMonthlyBalance() {
   const expense = Number(monthlyExpense.value) || 0;
 
   // 現在の合計貯金額を取得
-  const totalSaved = savingsGoals.reduce(
-    (sum, goal) => sum + Number(goal.saved || 0), 0
-  );
+  const totalSaved = Number(totalSavedInput.value) || 0;
 
   // 貯金＋今月の給料
   const totalMoney = totalSaved + salary;
