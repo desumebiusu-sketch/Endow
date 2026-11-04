@@ -934,3 +934,44 @@ function renderSettlementSavings() {
 
 // 最初に表示
 renderSettlementSavings();
+
+
+// ====================
+// 過去の精算・振り返り一覧
+// ====================
+
+const savedMonthList = document.getElementById("saved-month-list");
+
+function renderSavedMonths() {
+  savedMonthList.innerHTML =
+    '<option value="">保存した月を選択</option>';
+
+  const savedMonths = new Set([
+    ...Object.keys(settlementData),
+    ...Object.keys(monthlyReviews)
+  ]);
+
+  [...savedMonths].sort().reverse().forEach(month => {
+    const option = document.createElement("option");
+    option.value = month;
+    option.textContent = month.replace("-", "年") + "月";
+    savedMonthList.appendChild(option);
+  });
+}
+
+savedMonthList.addEventListener("change", function() {
+  if (!savedMonthList.value) return;
+
+  settlementMonth.value = savedMonthList.value;
+
+  loadSettlement();
+  loadMonthlyReview();
+  renderSettlement();
+  renderSavedMonths();
+});
+
+// 保存後に一覧を更新
+saveSettlementButton.addEventListener("click", renderSavedMonths);
+
+// 最初に一覧を表示
+renderSavedMonths();
