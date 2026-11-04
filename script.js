@@ -995,3 +995,5 @@ saveSettlementButton.addEventListener("click", renderSavedMonths);
 
 // 最初に一覧を表示
 renderSavedMonths();
+
+calculateMonthlyBalance();
