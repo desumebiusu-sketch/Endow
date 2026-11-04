@@ -788,6 +788,15 @@ function calculateMonthlyBalance() {
   // 現在の合計貯金額を取得
   const totalSaved = Number(totalSavedInput.value) || 0;
 
+  // 合計貯金額を保存
+totalSavedInput.value =
+  localStorage.getItem("endow-total-saved") || "";
+
+totalSavedInput.addEventListener("input", function() {
+  localStorage.setItem("endow-total-saved", totalSavedInput.value);
+  calculateMonthlyBalance();
+});
+
   // 貯金＋今月の給料
   const totalMoney = totalSaved + salary;
 
