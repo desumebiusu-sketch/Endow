@@ -793,7 +793,7 @@ totalSavedInput.addEventListener("input", function() {
 });
 
   // 貯金＋今月の給料
-  const totalMoney = totalSaved + salary;
+  const totalMoney = totalSaved + salary - expense;
 
   // 今月の給料－支出
   const balance = salary - expense;
