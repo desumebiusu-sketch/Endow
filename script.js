@@ -724,7 +724,6 @@ renderSavingsGoals();
 
 const settlementMonth = document.getElementById("settlement-month");
 const monthlyWorkSummary = document.getElementById("monthly-work-summary");
-const monthlySaving = document.getElementById("monthly-saving");
 const monthlyExpense = document.getElementById("monthly-expense");
 const monthlyBalance = document.getElementById("monthly-balance");
 const totalSavedInput = document.getElementById("total-saved-input");
@@ -782,7 +781,6 @@ function calculateMonthlyBalance() {
     ? Number(salaryText[1].replace(/,/g, ""))
     : 0;
 
-  const saving = Number(monthlySaving.value) || 0;
   const expense = Number(monthlyExpense.value) || 0;
 
   // 現在の合計貯金額を取得
@@ -817,7 +815,6 @@ settlementMonth.addEventListener("change", renderSettlement);
 worklogWage.addEventListener("input", renderSettlement);
 
 // 貯金・支出を変更したら再計算
-monthlySaving.addEventListener("input", calculateMonthlyBalance);
 monthlyExpense.addEventListener("input", calculateMonthlyBalance);
 
 // 初期表示
@@ -842,7 +839,6 @@ function saveSettlement() {
   }
 
   settlementData[month] = {
-    saving: Number(monthlySaving.value) || 0,
     expense: Number(monthlyExpense.value) || 0
   };
 
@@ -859,11 +855,9 @@ function loadSettlement() {
   const month = settlementMonth.value;
 
   const data = settlementData[month] || {
-    saving: 0,
     expense: 0
   };
 
-  monthlySaving.value = data.saving;
   monthlyExpense.value = data.expense;
 
   renderSettlement();
