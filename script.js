@@ -995,7 +995,11 @@ const wageInput = document.getElementById("wage");
 const hoursInput = document.getElementById("hours");
 
 // 保存済みの時給と勤務時間を読み込む
-wageInput.value = localStorage.getItem("endow-wage") || "";
+const savedWage = localStorage.getItem("endow-wage");
+
+if (savedWage !== null) {
+  wageInput.value = savedWage;
+}
 hoursInput.value = localStorage.getItem("endow-hours") || "5";
 
 // 入力したら自動保存する
