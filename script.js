@@ -989,3 +989,20 @@ saveSettlementButton.addEventListener("click", renderSavedMonths);
 renderSavedMonths();
 
 calculateMonthlyBalance();
+
+// 時給と1日の勤務時間を保存する
+const wageInput = document.getElementById("wage");
+const hoursInput = document.getElementById("hours");
+
+// 保存済みの時給と勤務時間を読み込む
+wageInput.value = localStorage.getItem("endow-wage") || "";
+hoursInput.value = localStorage.getItem("endow-hours") || "5";
+
+// 入力したら自動保存する
+wageInput.addEventListener("input", function() {
+  localStorage.setItem("endow-wage", wageInput.value);
+});
+
+hoursInput.addEventListener("input", function() {
+  localStorage.setItem("endow-hours", hoursInput.value);
+});
