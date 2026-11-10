@@ -567,6 +567,7 @@ todoButton.addEventListener("click", function() {
 
 worklogButton.addEventListener("click", function() {
   showScreen(worklogScreen);
+  renderSettlement();
 });
 
 savingsButton.addEventListener("click", function() {
@@ -742,25 +743,21 @@ function renderSettlement() {
   let totalMinutes = 0;
   let days = 0;
 
-  worklogs.forEach(worklog => {
-    const [workYear, workMonth] = worklog.date.split("-").map(Number);
+  Object.keys(events).forEach(dateKey => {
+  const [eventYear, eventMonth] = dateKey.split("-").map(Number);
 
-    if (workYear === year && workMonth === month) {
-      const [startHour, startMinute] = worklog.start.split(":").map(Number);
-      const [endHour, endMinute] = worklog.end.split(":").map(Number);
-
-      let start = startHour * 60 + startMinute;
-      let end = endHour * 60 + endMinute;
-
-      if (end < start) end += 24 * 60;
-
-      totalMinutes += end - start;
-      days++;
-    }
-  });
+  if (eventYear === year && eventMonth === month) {
+    events[dateKey].forEach(event => {
+      if (event.title === "バイト") {
+        totalMinutes += Number(event.hours || 0) * 60;
+        days++;
+      }
+    });
+  }
+});
 
   const totalHours = totalMinutes / 60;
-  const wage = Number(worklogWage.value) || 0;
+  const wage = Number(document.getElementById("wage").value) || 0;
   const salary = Math.floor(totalHours * wage);
 
   monthlyWorkSummary.innerHTML = `
@@ -813,6 +810,7 @@ settlementMonth.addEventListener("change", renderSettlement);
 
 // 時給を変更したら再計算
 worklogWage.addEventListener("input", renderSettlement);
+document.getElementById("wage").addEventListener("input", renderSettlement);
 
 // 貯金・支出を変更したら再計算
 monthlyExpense.addEventListener("input", calculateMonthlyBalance);
