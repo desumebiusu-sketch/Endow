@@ -207,10 +207,31 @@
 </div>
 
 
-  <label>
-    今月の支出（円）
-    <input type="number" id="monthly-expense" min="0" placeholder="例：10000">
-  </label>
+  <h3>🧾 今月の支出メモ</h3>
+
+<div class="expense-form">
+  <input
+    type="text"
+    id="expense-name"
+    placeholder="支出内容（例：食費）"
+  >
+
+  <input
+    type="number"
+    id="expense-amount"
+    min="1"
+    placeholder="金額（円）"
+  >
+
+  <button id="add-expense">支出を追加</button>
+</div>
+
+<ul id="expense-list"></ul>
+
+<p>
+  支出合計：
+  <strong id="expense-total">0円</strong>
+</p>
 
   <div class="monthly-balance-card">
   <p>🏦 現在の合計貯金額</p>

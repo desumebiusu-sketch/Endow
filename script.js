@@ -725,8 +725,116 @@ renderSavingsGoals();
 
 const settlementMonth = document.getElementById("settlement-month");
 const monthlyWorkSummary = document.getElementById("monthly-work-summary");
-const monthlyExpense = document.getElementById("monthly-expense");
+const expenseName = document.getElementById("expense-name");
+const expenseAmount = document.getElementById("expense-amount");
+const addExpenseButton = document.getElementById("add-expense");
+const expenseList = document.getElementById("expense-list");
+const expenseTotal = document.getElementById("expense-total");
 const monthlyBalance = document.getElementById("monthly-balance");
+
+// 月ごとの支出データ
+let monthlyExpenses = JSON.parse(
+  localStorage.getItem("endow-monthly-expenses") || "{}"
+);
+// 支出を追加する
+function addExpense() {
+  const name = expenseName.value.trim();
+  const amount = Number(expenseAmount.value);
+
+  if (!name) {
+    alert("支出内容を入力してください");
+    return;
+  }
+
+  if (!amount || amount <= 0) {
+    alert("正しい金額を入力してください");
+    return;
+  }
+
+  const month = settlementMonth.value;
+
+  if (!monthlyExpenses[month]) {
+    monthlyExpenses[month] = [];
+  }
+
+  // 同じ内容の支出があるか確認
+  const existingExpense = monthlyExpenses[month].find(
+    expense => expense.name === name
+  );
+
+  if (existingExpense) {
+    // あれば金額を上乗せ
+    existingExpense.amount += amount;
+  } else {
+    // なければ新しく追加
+    monthlyExpenses[month].push({
+      name: name,
+      amount: amount
+    });
+  }
+
+  localStorage.setItem(
+    "endow-monthly-expenses",
+    JSON.stringify(monthlyExpenses)
+  );
+
+  expenseName.value = "";
+  expenseAmount.value = "";
+
+  renderExpenseList();
+  calculateMonthlyBalance();
+}
+
+// 追加ボタンを押したとき
+addExpenseButton.addEventListener("click", addExpense);
+// 支出一覧を表示する
+function renderExpenseList() {
+  const month = settlementMonth.value;
+  const expenses = monthlyExpenses[month] || [];
+
+  expenseList.innerHTML = "";
+
+  let total = 0;
+
+  expenses.forEach((expense, index) => {
+    total += expense.amount;
+
+    const li = document.createElement("li");
+
+    li.innerHTML = `
+      <span>${expense.name}：${expense.amount.toLocaleString()}円</span>
+      <button class="delete-expense" data-index="${index}">×</button>
+    `;
+
+    expenseList.appendChild(li);
+  });
+
+  expenseTotal.textContent = total.toLocaleString() + "円";
+
+  
+}
+// 支出を削除する
+expenseList.addEventListener("click", function(event) {
+  if (!event.target.classList.contains("delete-expense")) {
+    return;
+  }
+
+  const month = settlementMonth.value;
+  const index = Number(event.target.dataset.index);
+
+  if (!monthlyExpenses[month]) return;
+
+  monthlyExpenses[month].splice(index, 1);
+
+  localStorage.setItem(
+    "endow-monthly-expenses",
+    JSON.stringify(monthlyExpenses)
+  );
+
+  renderExpenseList();
+  calculateMonthlyBalance();
+});
+
 const totalSavedInput = document.getElementById("total-saved-input");
 const saveSettlementButton = document.getElementById("save-settlement");
 
@@ -778,7 +886,13 @@ function calculateMonthlyBalance() {
     ? Number(salaryText[1].replace(/,/g, ""))
     : 0;
 
-  const expense = Number(monthlyExpense.value) || 0;
+  const month = settlementMonth.value;
+const expenses = monthlyExpenses[month] || [];
+
+const expense = expenses.reduce(
+  (total, item) => total + Number(item.amount || 0),
+  0
+);
 
   // 現在の合計貯金額を取得
   const totalSaved = Number(totalSavedInput.value) || 0;
@@ -813,7 +927,7 @@ worklogWage.addEventListener("input", renderSettlement);
 document.getElementById("wage").addEventListener("input", renderSettlement);
 
 // 貯金・支出を変更したら再計算
-monthlyExpense.addEventListener("input", calculateMonthlyBalance);
+settlementMonth.addEventListener("change", renderExpenseList);
 
 // 初期表示
 renderSettlement();
@@ -836,8 +950,15 @@ function saveSettlement() {
     return;
   }
 
+  const expenses = monthlyExpenses[month] || [];
+
+  const totalExpense = expenses.reduce(
+    (total, item) => total + Number(item.amount || 0),
+    0
+  );
+
   settlementData[month] = {
-    expense: Number(monthlyExpense.value) || 0
+    expense: totalExpense
   };
 
   localStorage.setItem(
@@ -847,17 +968,33 @@ function saveSettlement() {
 
   alert("精算内容を保存しました！");
 }
-
 // 月を選択したとき保存済みデータを読み込む
 function loadSettlement() {
   const month = settlementMonth.value;
+
+  if (!month) return;
 
   const data = settlementData[month] || {
     expense: 0
   };
 
-  monthlyExpense.value = data.expense;
+  // 古い形式で保存された支出も引き継ぐ
+  if (!monthlyExpenses[month] && data.expense > 0) {
+    monthlyExpenses[month] = [
+      {
+        name: "以前の支出",
+        amount: Number(data.expense)
+      }
+    ];
+  }
 
+  // 支出データを保存
+  localStorage.setItem(
+    "endow-monthly-expenses",
+    JSON.stringify(monthlyExpenses)
+  );
+
+  renderExpenseList();
   renderSettlement();
 }
 
@@ -869,6 +1006,7 @@ settlementMonth.addEventListener("change", loadSettlement);
 
 // 最初に保存済みデータを読み込む
 loadSettlement();
+renderExpenseList();
 
 
 // ====================
