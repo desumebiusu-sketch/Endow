@@ -222,3 +222,48 @@ h1 {
   margin: 15px 0;
   color: white;
 }
+
+
+/* 年収上限チェック */
+.annual-income-check {
+  background: #f0f6ff;
+  border: 2px solid #8bbcff;
+  border-radius: 15px;
+  padding: 20px;
+  margin: 20px 0;
+  text-align: center;
+}
+
+.annual-income-check h2 {
+  color: #2563a8;
+}
+
+.annual-income-check h1 {
+  font-size: 30px;
+  color: #2563a8;
+  margin: 10px 0 20px;
+}
+
+.annual-income-check h3 {
+  margin-top: 20px;
+}
+
+.annual-income-check select {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #aaa;
+  font-size: 16px;
+}
+
+#income-status {
+  font-weight: bold;
+  color: #219653;
+  font-size: 20px;
+}
+
+#income-message {
+  color: #219653;
+  background: #e1f7e9;
+  padding: 12px;
+  border-radius: 10px;
+}
