@@ -29,6 +29,8 @@ Object.keys(events).forEach(dateKey => {
 
 function saveEvents() {
   localStorage.setItem("endow-events", JSON.stringify(events));
+
+  renderAnnualIncomeCheck();
 }
 
 function renderCalendar() {
@@ -1148,3 +1150,103 @@ wageInput.addEventListener("input", function() {
 hoursInput.addEventListener("input", function() {
   localStorage.setItem("endow-hours", hoursInput.value);
 });
+
+// ====================
+// 年収上限チェック
+// ====================
+
+const incomeAge = document.getElementById("income-age");
+
+// 年間給料を計算して表示
+function renderAnnualIncomeCheck() {
+
+  // 今年の年を取得
+  const year = new Date().getFullYear();
+
+  // 年齢区分によって上限を設定
+  const limit = incomeAge.value === "19to22"
+    ? 1500000
+    : 1300000;
+
+  // 今年のバイト時間を集計
+  let totalHours = 0;
+
+  Object.keys(events).forEach(dateKey => {
+
+    const [eventYear] = dateKey.split("-").map(Number);
+
+    if (eventYear === year) {
+
+      events[dateKey].forEach(event => {
+
+        if (event.title === "バイト") {
+          totalHours += Number(event.hours || 0);
+        }
+
+      });
+
+    }
+
+  });
+
+  // 時給を取得
+  const wage = Number(wageInput.value) || 0;
+
+  // 年間給料を計算
+  const annualSalary = Math.floor(totalHours * wage);
+
+  // 残り金額
+  const remaining = limit - annualSalary;
+
+  // 使用率
+  const usage = Math.floor(annualSalary / limit * 100);
+
+  // 金額を表示
+  document.getElementById("income-limit").textContent =
+    limit.toLocaleString() + "円";
+
+  document.getElementById("annual-income").textContent =
+    annualSalary.toLocaleString() + "円";
+
+  document.getElementById("income-remaining").textContent =
+    Math.max(0, remaining).toLocaleString() + "円";
+
+  document.getElementById("income-usage").textContent =
+    "上限までの使用率：" + usage + "%";
+
+  // 状態と警告を表示
+  const status = document.getElementById("income-status");
+  const message = document.getElementById("income-message");
+
+  if (remaining <= 0) {
+
+    status.textContent = "上限超過";
+    message.textContent = "⚠️ 扶養の上限を超えています！";
+
+  } else if (usage >= 90) {
+
+    status.textContent = "要注意";
+    message.textContent = "⚠️ 上限が近づいています！";
+
+  } else if (usage >= 80) {
+
+    status.textContent = "注意";
+    message.textContent = "上限まで残りわずかです！";
+
+  } else {
+
+    status.textContent = "余裕あり";
+    message.textContent = "上限まで余裕があります！";
+
+  }
+
+}
+
+// 年齢区分を変更したら再計算
+incomeAge.addEventListener("change", renderAnnualIncomeCheck);
+
+// 時給を変更したら再計算
+wageInput.addEventListener("input", renderAnnualIncomeCheck);
+
+// 最初に表示
+renderAnnualIncomeCheck();
