@@ -31,6 +31,7 @@ function saveEvents() {
   localStorage.setItem("endow-events", JSON.stringify(events));
 
   renderAnnualIncomeCheck();
+  renderTaxIncomeCheck();
 }
 
 function renderCalendar() {
@@ -1295,3 +1296,5 @@ function renderTaxIncomeCheck() {
 }
 
 incomeAge.addEventListener("change", renderTaxIncomeCheck);
+// 最初に税金チェックを表示
+renderTaxIncomeCheck();
