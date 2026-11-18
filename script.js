@@ -1250,3 +1250,48 @@ wageInput.addEventListener("input", renderAnnualIncomeCheck);
 
 // 最初に表示
 renderAnnualIncomeCheck();
+// ====================
+// 親の所得税チェック
+// ====================
+
+function renderTaxIncomeCheck() {
+
+  const age = incomeAge.value;
+
+  let fullLimit = 1360000;
+  let finalLimit = 1360000;
+
+  if (age === "19to22") {
+    fullLimit = 1590000;
+    finalLimit = 1970000;
+  }
+
+  const annualSalary = Number(
+    document.getElementById("annual-income").textContent
+      .replace(/[^0-9]/g, "")
+  ) || 0;
+
+  document.getElementById("tax-full-limit").textContent =
+    (fullLimit / 10000).toLocaleString() + "万円";
+
+  document.getElementById("tax-final-limit").textContent =
+    (finalLimit / 10000).toLocaleString() + "万円";
+
+  const taxMessage = document.getElementById("tax-income-message");
+
+  if (age === "under19") {
+    taxMessage.textContent =
+      "16〜18歳は、この年収では親の所得税の扶養控除の対象外です。";
+  } else if (annualSalary <= fullLimit) {
+    taxMessage.textContent =
+      "親の所得税の控除が満額になる目安です！";
+  } else if (annualSalary <= finalLimit) {
+    taxMessage.textContent =
+      "親の所得税の控除が段階的に減ります。";
+  } else {
+    taxMessage.textContent =
+      "親の所得税の扶養に関する控除の対象外となる目安です。";
+  }
+}
+
+incomeAge.addEventListener("change", renderTaxIncomeCheck);
