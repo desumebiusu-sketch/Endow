@@ -402,14 +402,9 @@ h1 {
   }
 }
 
-/* 予定削除画面 */
+/* 予定削除画面を非表示 */
 #delete-event-panel {
- display: block !important;
-  background: #fff5f5;
-  border: 2px solid #ff9999;
-  border-radius: 12px;
-  padding: 20px;
-  margin: 20px 0;
+  display: none !important;
 }
 
 #delete-event-list {
@@ -660,7 +655,7 @@ h1 {
   flex-wrap: nowrap;
 }
 
-.month-navigation button {
+.month-navｆigation button {
   flex: 0 0 auto;
   width: 40px;
   padding: 8px;
