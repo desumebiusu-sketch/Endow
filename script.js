@@ -91,17 +91,20 @@ saveEvents();
 renderCalendar();
 });
 
-        // 予定の文字
-        const eventText = document.createElement("span");
-        eventText.textContent = event.title;
-
-        eventElement.appendChild(eventText);
+        // 予定の文字（バイトの場合は表示しない）
+if (event.title === "バイト") {
+  eventElement.classList.add("event-work");
+} else {
+  const eventText = document.createElement("span");
+  eventText.textContent = event.title;
+  eventElement.appendChild(eventText);
+}
 
         // バイトの場合は勤務時間の変更ボタンを表示
         if (event.title === "バイト") {
           const hoursText = document.createElement("span");
-          hoursText.textContent = ` ${event.hours}時間 `;
-          eventElement.appendChild(hoursText);
+hoursText.textContent = ` ${event.hours}h `;
+eventElement.appendChild(hoursText);
 
           // －ボタン
           const minusButton = document.createElement("button");
