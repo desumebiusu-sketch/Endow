@@ -1330,3 +1330,24 @@ function renderTaxIncomeCheck() {
 incomeAge.addEventListener("change", renderTaxIncomeCheck);
 // 最初に税金チェックを表示
 renderTaxIncomeCheck();
+
+// 予定削除モード
+let isDeleteMode = false;
+
+// 予定削除ボタン
+document.getElementById("delete-event-mode-button").addEventListener("click", () => {
+  isDeleteMode = true;
+
+  document.getElementById("delete-event-panel").style.display = "block";
+
+  document.getElementById("delete-event-date").textContent =
+    "削除したい予定がある日付をカレンダーから選んでね";
+
+  document.getElementById("delete-event-list").innerHTML = "";
+});
+
+// 削除画面を閉じるボタン
+document.getElementById("close-delete-panel").addEventListener("click", () => {
+  isDeleteMode = false;
+  document.getElementById("delete-event-panel").style.display = "none";
+});
