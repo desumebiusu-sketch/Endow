@@ -1321,11 +1321,11 @@ let isDeleteMode = false;
 // 予定削除ボタン
 document.getElementById("delete-event-mode-button").addEventListener("click", () => {
   isDeleteMode = true;
-  alert("予定削除ボタンは反応しています！");
 
-  document.getElementById("delete-event-panel").style.display = "block";
-document.getElementById("delete-event-panel").style.visibility = "visible";
-  alert("削除画面を表示する処理まで進みました！");
+  const panel = document.getElementById("delete-event-panel");
+
+  panel.style.display = "block";
+  panel.style.visibility = "visible";
 
   document.getElementById("delete-event-date").textContent =
     "削除したい予定がある日付をカレンダーから選んでね";
