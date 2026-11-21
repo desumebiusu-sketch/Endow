@@ -109,8 +109,19 @@ if (holidays[dateKey]) {
 
     // 日付の数字
     const numberElement = document.createElement("div");
-    numberElement.textContent = day;
-    dayElement.appendChild(numberElement);
+numberElement.classList.add("day-number");
+
+numberElement.textContent = day;
+
+if (holidays[dateKey]) {
+  const holidayElement = document.createElement("span");
+  holidayElement.classList.add("holiday-name");
+  holidayElement.textContent = holidays[dateKey];
+
+  numberElement.appendChild(holidayElement);
+}
+
+dayElement.appendChild(numberElement);
 
     
     // 予定がある場合だけ表示する
