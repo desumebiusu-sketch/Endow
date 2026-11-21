@@ -647,3 +647,29 @@ h1 {
     order: 2;
   }
 }
+
+
+/* 月切り替えをひとまとまりにする */
+.month-navigation {
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: center !important;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  flex-wrap: nowrap;
+}
+
+.month-navigation button {
+  flex: 0 0 auto;
+  width: 40px;
+  padding: 8px;
+}
+
+.month-navigation h2 {
+  flex: 0 0 auto;
+  min-width: 130px;
+  margin: 0;
+  text-align: center;
+  white-space: nowrap;
+}
