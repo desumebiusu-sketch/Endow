@@ -1324,6 +1324,7 @@ document.getElementById("delete-event-mode-button").addEventListener("click", ()
   alert("予定削除ボタンは反応しています！");
 
   document.getElementById("delete-event-panel").style.display = "block";
+  alert("削除画面を表示する処理まで進みました！");
 
   document.getElementById("delete-event-date").textContent =
     "削除したい予定がある日付をカレンダーから選んでね";
