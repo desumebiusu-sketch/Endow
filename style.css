@@ -499,20 +499,37 @@ h1 {
 }
 
 /* スマホ向け */
+
 @media (max-width: 600px) {
   .event-work {
     padding: 3px 1px;
     gap: 3px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   .event-work span {
     font-size: 14px;
+    display: block;
+  }
+
+  .work-buttons {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    width: 100%;
   }
 
   .event-work button {
+    display: inline-flex !important;
     width: 26px;
     height: 25px;
     min-width: 26px;
     font-size: 15px;
+    flex-shrink: 0;
   }
 }
