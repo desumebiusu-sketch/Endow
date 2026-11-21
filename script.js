@@ -10,6 +10,41 @@ const addWorkButton = document.getElementById("add-work-button");
 
 let currentDate = new Date();
 
+// 日本の祝日データ
+let holidays = {};
+
+// 祝日データを年ごとに取得
+let loadedHolidayYears = {};
+
+async function loadHolidays(year) {
+  if (loadedHolidayYears[year]) return;
+
+  loadedHolidayYears[year] = true;
+
+  try {
+    const response = await fetch(
+      `https://holidays-jp.github.io/api/v1/${year}/date.json`
+    );
+
+    if (!response.ok) {
+      throw new Error("祝日データを取得できませんでした");
+    }
+
+    const data = await response.json();
+
+    holidays = { ...holidays, ...data };
+
+    // 祝日取得後にカレンダーを更新
+    renderCalendar();
+
+  } catch (error) {
+    delete loadedHolidayYears[year];
+    console.error("祝日取得エラー:", error);
+  }
+}
+
+
+
 
 let events = JSON.parse(localStorage.getItem("endow-events")) || {};
 
@@ -37,6 +72,8 @@ function saveEvents() {
 function renderCalendar() {
   const year = currentDate.getFullYear();
   const month = currentDate.getMonth();
+    // 表示している年の祝日を取得
+  loadHolidays(year);
 
   monthYear.textContent = `${year}年 ${month + 1}月`;
 
@@ -59,6 +96,16 @@ function renderCalendar() {
 
     const dateKey =
       `${year}-${String(month + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+      // 曜日・祝日による色分け
+const dayOfWeek = new Date(year, month, day).getDay();
+
+if (holidays[dateKey]) {
+  dayElement.classList.add("holiday");
+} else if (dayOfWeek === 0) {
+  dayElement.classList.add("sunday");
+} else if (dayOfWeek === 6) {
+  dayElement.classList.add("saturday");
+}
 
     // 日付の数字
     const numberElement = document.createElement("div");

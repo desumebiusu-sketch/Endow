@@ -732,3 +732,15 @@ h1 {
     padding: 4px 3px;
   }
 }
+
+/* 土日・祝日の色分け */
+.day.sunday > div:first-child,
+.day.holiday > div:first-child {
+  color: #e53935;
+  font-weight: bold;
+}
+
+.day.saturday > div:first-child {
+  color: #1976d2;
+  font-weight: bold;
+}
