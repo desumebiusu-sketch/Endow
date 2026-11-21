@@ -528,3 +528,37 @@ h1 {
     font-size: 15px;
   }
 }
+
+
+/* スマホ用：予定入力欄の改善 */
+@media (max-width: 600px) {
+
+  .event-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 14px 12px;
+    margin-bottom: 15px;
+  }
+
+  .event-form h3 {
+    margin-bottom: 5px;
+    font-size: 17px;
+  }
+
+  .event-form input {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 12px;
+    font-size: 16px;
+  }
+
+  .event-form button {
+    width: 100%;
+    margin: 0;
+    padding: 12px;
+    font-size: 15px;
+  }
+
+}
