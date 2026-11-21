@@ -744,3 +744,22 @@ h1 {
   color: #1976d2;
   font-weight: bold;
 }
+
+/* 日付と祝日名を横並びにする */
+.day-number {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  min-width: 0;
+}
+
+/* 祝日名の表示 */
+.holiday-name {
+  font-size: 8px;
+  color: #e53935;
+  font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+}
