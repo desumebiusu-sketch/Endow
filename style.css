@@ -745,21 +745,25 @@ h1 {
   font-weight: bold;
 }
 
-/* 日付と祝日名を横並びにする */
+/* 日付と祝日名を横一列にする */
 .day-number {
   display: flex;
   align-items: center;
-  gap: 3px;
-  min-width: 0;
+  gap: 5px;
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
-/* 祝日名の表示 */
+/* 祝日名 */
 .holiday-name {
+  display: block;
+  flex: 1;
+  min-width: 0;
   font-size: 8px;
   color: #e53935;
   font-weight: bold;
-  white-space: nowrap;
+  white-space: nowrap !important;
   overflow: hidden;
   text-overflow: ellipsis;
-  min-width: 0;
 }
