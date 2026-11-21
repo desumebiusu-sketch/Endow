@@ -404,7 +404,7 @@ h1 {
 
 /* 予定削除画面 */
 #delete-event-panel {
-  display: block;
+ display: block !important;
   background: #fff5f5;
   border: 2px solid #ff9999;
   border-radius: 12px;
