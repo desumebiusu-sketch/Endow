@@ -595,3 +595,36 @@ h1 {
     font-size: 14px;
   }
 }
+
+
+/* 予定入力ボタンの色 */
+#add-event {
+  background: #3478d4;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+}
+
+#add-work-button {
+  background: #e58a25;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+}
+
+#delete-event-mode-button {
+  background: #e45b5b;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+}
+
+/* ボタンを押したとき */
+#add-event:active,
+#add-work-button:active,
+#delete-event-mode-button:active {
+  opacity: 0.8;
+}
