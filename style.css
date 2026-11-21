@@ -335,3 +335,69 @@ h1 {
     font-size: 16px;
   }
 }
+
+
+/* カレンダーのスマホ対応 */
+@media (max-width: 600px) {
+
+  .calendar {
+    width: 100%;
+    padding: 8px;
+    margin: 0 auto 25px;
+    border-radius: 8px;
+  }
+
+  .calendar-header {
+    gap: 5px;
+    margin-bottom: 12px;
+  }
+
+  .calendar-header h2 {
+    font-size: 18px;
+  }
+
+  .calendar-header button {
+    padding: 8px 10px;
+    font-size: 15px;
+  }
+
+  .weekdays div {
+    padding: 5px 0;
+    font-size: 12px;
+  }
+
+  .calendar-days {
+    gap: 2px;
+  }
+
+  .day {
+    min-width: 0;
+    min-height: 65px;
+    padding: 4px 2px;
+    border-radius: 5px;
+    font-size: 12px;
+  }
+
+  .event {
+    font-size: 9px;
+    padding: 3px 2px;
+    margin-top: 3px;
+    min-width: 0;
+  }
+
+  .delete-event {
+    width: 16px;
+    height: 18px;
+    font-size: 12px;
+    margin-left: 1px;
+  }
+
+  .event-form input {
+    max-width: 100%;
+    margin: 4px 0;
+  }
+
+  .event-form button {
+    margin-top: 5px;
+  }
+}
