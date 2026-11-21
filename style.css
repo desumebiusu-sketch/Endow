@@ -498,38 +498,27 @@ h1 {
   flex-shrink: 0;
 }
 
-/* スマホ向け */
 
+/* スマホ向け */
 @media (max-width: 600px) {
   .event-work {
-    padding: 3px 1px;
-    gap: 3px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    padding: 5px 2px;
+    gap: 5px;
+    min-height: 62px;
   }
 
   .event-work span {
     font-size: 14px;
-    display: block;
   }
 
   .work-buttons {
-    display: flex !important;
-    flex-direction: row !important;
-    flex-wrap: nowrap !important;
-    justify-content: center;
-    align-items: center;
-    gap: 4px;
-    width: 100%;
+    gap: 5px;
   }
 
   .event-work button {
-    display: inline-flex !important;
-    width: 26px;
+    width: 25px;
     height: 25px;
-    min-width: 26px;
-    font-size: 15px;
-    flex-shrink: 0;
+    min-width: 25px;
+    font-size: 14px;
   }
 }
