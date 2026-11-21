@@ -100,39 +100,49 @@ if (event.title === "バイト") {
   eventElement.appendChild(eventText);
 }
 
-        // バイトの場合は勤務時間の変更ボタンを表示
-        if (event.title === "バイト") {
-          const hoursText = document.createElement("span");
-hoursText.textContent = ` ${event.hours}h `;
-eventElement.appendChild(hoursText);
+       
+// バイトの場合は勤務時間の変更ボタンを表示
+if (event.title === "バイト") {
 
-          // －ボタン
-          const minusButton = document.createElement("button");
-          minusButton.textContent = "−";
-          minusButton.addEventListener("click", (e) => {
-            e.stopPropagation();
+  // 勤務時間
+  const hoursText = document.createElement("span");
+  hoursText.textContent = `${event.hours}h`;
+  eventElement.appendChild(hoursText);
 
-            if (event.hours > 0) {
-              event.hours--;
-              saveEvents();
-              renderCalendar();
-            }
-          });
+  // ボタンをまとめる箱
+  const buttonBox = document.createElement("div");
+  buttonBox.classList.add("work-buttons");
 
-          // ＋ボタン
-          const plusButton = document.createElement("button");
-          plusButton.textContent = "＋";
-          plusButton.addEventListener("click", (e) => {
-            e.stopPropagation();
+  // －ボタン
+  const minusButton = document.createElement("button");
+  minusButton.textContent = "−";
+  minusButton.addEventListener("click", (e) => {
+    e.stopPropagation();
 
-            event.hours++;
-            saveEvents();
-            renderCalendar();
-          });
+    if (event.hours > 0) {
+      event.hours--;
+      saveEvents();
+      renderCalendar();
+    }
+  });
 
-          eventElement.appendChild(minusButton);
-          eventElement.appendChild(plusButton);
-        }
+  // ＋ボタン
+  const plusButton = document.createElement("button");
+  plusButton.textContent = "＋";
+  plusButton.addEventListener("click", (e) => {
+    e.stopPropagation();
+
+    event.hours++;
+    saveEvents();
+    renderCalendar();
+  });
+
+  buttonBox.appendChild(minusButton);
+  buttonBox.appendChild(plusButton);
+
+  eventElement.appendChild(buttonBox);
+}
+
 
 
         dayElement.appendChild(eventElement);

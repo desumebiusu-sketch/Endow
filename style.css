@@ -486,7 +486,21 @@ h1 {
   cursor: pointer;
 }
 
-/* ボタンを2列に配置 */
-.event-work button:first-of-type {
-  margin-right: 3px;
+
+/* ボタンを横2列にする */
+.work-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  width: 100%;
+}
+
+/* ボタンのサイズ */
+.event-work button {
+  width: 28px;
+  height: 25px;
+  min-width: 28px;
+  padding: 0;
 }
