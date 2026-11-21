@@ -1321,6 +1321,7 @@ let isDeleteMode = false;
 // 予定削除ボタン
 document.getElementById("delete-event-mode-button").addEventListener("click", () => {
   isDeleteMode = true;
+  alert("予定削除ボタンは反応しています！");
 
   document.getElementById("delete-event-panel").style.display = "block";
 
