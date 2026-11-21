@@ -433,3 +433,48 @@ h1 {
   padding: 8px 14px;
   cursor: pointer;
 }
+
+
+/* カレンダーの通常予定 */
+.event {
+  background: #e3efff;
+  color: #1760b5;
+  border-radius: 8px;
+  padding: 8px;
+  margin: 5px 0;
+  font-weight: bold;
+}
+
+/* バイトの予定 */
+.event-work {
+  background: #fff0dc;
+  color: #d97706;
+  border: 1px solid #f5bd78;
+  border-radius: 10px;
+  padding: 10px 6px;
+  margin: 5px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* バイトの勤務時間 */
+.event-work span {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+/* バイトのプラス・マイナスボタン */
+.event-work button {
+  font-size: 20px;
+  font-weight: bold;
+  min-width: 38px;
+  min-height: 38px;
+  border-radius: 8px;
+  border: 1px solid #d97706;
+  background: white;
+  color: #d97706;
+  cursor: pointer;
+}
