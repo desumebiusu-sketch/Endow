@@ -446,14 +446,15 @@ h1 {
 }
 
 
+
 /* バイトの予定 */
 .event-work {
   background: #fff0dc;
   color: #d97706;
   border: 1px solid #f5bd78;
-  border-radius: 8px;
+  border-radius: 7px;
   padding: 4px 2px;
-  margin: 3px 0;
+  margin: 2px 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -465,27 +466,11 @@ h1 {
 
 /* 勤務時間 */
 .event-work span {
-  font-size: 16px;
+  font-size: 15px;
   font-weight: bold;
   line-height: 1.2;
   white-space: nowrap;
 }
-
-/* ＋・−ボタン */
-.event-work button {
-  font-size: 16px;
-  font-weight: bold;
-  width: 28px;
-  height: 25px;
-  min-width: 28px;
-  padding: 0;
-  border-radius: 6px;
-  border: 1px solid #d97706;
-  background: white;
-  color: #d97706;
-  cursor: pointer;
-}
-
 
 /* ボタンを横2列にする */
 .work-buttons {
@@ -493,14 +478,41 @@ h1 {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  gap: 4px;
+  gap: 5px;
   width: 100%;
 }
 
-/* ボタンのサイズ */
+/* ＋・−ボタン */
 .event-work button {
-  width: 28px;
-  height: 25px;
-  min-width: 28px;
+  width: 30px;
+  height: 27px;
+  min-width: 30px;
   padding: 0;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 6px;
+  border: 1px solid #d97706;
+  background: white;
+  color: #d97706;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+/* スマホ向け */
+@media (max-width: 600px) {
+  .event-work {
+    padding: 3px 1px;
+    gap: 3px;
+  }
+
+  .event-work span {
+    font-size: 14px;
+  }
+
+  .event-work button {
+    width: 26px;
+    height: 25px;
+    min-width: 26px;
+    font-size: 15px;
+  }
 }
