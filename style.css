@@ -628,3 +628,22 @@ h1 {
 #delete-event-mode-button:active {
   opacity: 0.8;
 }
+
+
+/* スマホ：月切り替えを上にする */
+@media (max-width: 600px) {
+  .calendar-header {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .month-navigation {
+    order: 1;
+  }
+
+  .event-form {
+    order: 2;
+  }
+}
