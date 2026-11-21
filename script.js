@@ -81,16 +81,14 @@ eventElement.addEventListener("click", (e) => {
     ? `バイト（${event.hours}時間）`
     : event.title;
 
-  if (confirm(`「${name}」を削除しますか？`)) {
-    events[dateKey].splice(index, 1);
+  events[dateKey].splice(index, 1);
 
-    if (events[dateKey].length === 0) {
-      delete events[dateKey];
-    }
+if (events[dateKey].length === 0) {
+  delete events[dateKey];
+}
 
-    saveEvents();
-    renderCalendar();
-  }
+saveEvents();
+renderCalendar();
 });
 
         // 予定の文字
@@ -177,7 +175,6 @@ addEventButton.addEventListener("click", () => {
 
   renderCalendar();
 
-  alert("予定を追加しました！");
 });
 
 // バイトを追加
@@ -202,7 +199,6 @@ events[date].push({
   saveEvents();
   renderCalendar();
 
-  alert("バイトを追加しました！");
 });
 
 // 前の月
