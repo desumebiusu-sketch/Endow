@@ -112,27 +112,7 @@ function renderCalendar() {
           eventElement.appendChild(plusButton);
         }
 
-        // ×ボタン
-        const deleteButton = document.createElement("button");
-        deleteButton.textContent = "×";
-        deleteButton.classList.add("delete-event");
 
-        deleteButton.addEventListener("click", (e) => {
-          e.stopPropagation();
-
-          if (confirm(`「${event.title}」を削除しますか？`)) {
-            events[dateKey].splice(index, 1);
-
-            if (events[dateKey].length === 0) {
-              delete events[dateKey];
-            }
-
-            saveEvents();
-            renderCalendar();
-          }
-        });
-
-        eventElement.appendChild(deleteButton);
         dayElement.appendChild(eventElement);
       });
     }
