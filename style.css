@@ -499,12 +499,14 @@ h1 {
 }
 
 
+
 /* スマホ向け */
 @media (max-width: 600px) {
   .event-work {
-    padding: 5px 2px;
-    gap: 5px;
-    min-height: 62px;
+    padding: 4px 2px;
+    gap: 3px;
+    min-height: 0;
+    margin: 3px 0;
   }
 
   .event-work span {
@@ -512,13 +514,17 @@ h1 {
   }
 
   .work-buttons {
-    gap: 5px;
+    display: flex;
+    width: auto;
+    gap: 6px;
+    justify-content: center;
   }
 
   .event-work button {
-    width: 25px;
-    height: 25px;
-    min-width: 25px;
-    font-size: 14px;
+    width: 30px;
+    height: 27px;
+    min-width: 30px;
+    padding: 0;
+    font-size: 15px;
   }
 }
