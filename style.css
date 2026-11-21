@@ -308,3 +308,30 @@ h1 {
 #tax-income-message {
   font-weight: bold;
 }
+
+
+/* 年収・税金チェックのスマホ対応 */
+@media (max-width: 600px) {
+  .annual-income-check,
+  .tax-income-check {
+    padding: 15px 10px;
+    margin-top: 20px;
+  }
+
+  .annual-income-check h1,
+  .tax-income-check h1 {
+    font-size: 28px;
+  }
+
+  .annual-income-check h2,
+  .tax-income-check h2 {
+    font-size: 21px;
+  }
+
+  .annual-income-check select {
+    width: 100%;
+    max-width: 250px;
+    padding: 10px;
+    font-size: 16px;
+  }
+}
