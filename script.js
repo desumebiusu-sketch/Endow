@@ -139,8 +139,12 @@ function renderCalendar() {
 
     // 日付をクリックしたら入力欄に日付を入れる
     dayElement.addEventListener("click", () => {
-      eventDate.value = dateKey;
-    });
+  eventDate.value = dateKey;
+
+  if (isDeleteMode) {
+    showDeleteEventList(dateKey);
+  }
+});
 
 
     calendarDays.appendChild(dayElement);
@@ -1351,3 +1355,49 @@ document.getElementById("close-delete-panel").addEventListener("click", () => {
   isDeleteMode = false;
   document.getElementById("delete-event-panel").style.display = "none";
 });
+
+// 選択した日の予定を一覧表示
+function showDeleteEventList(dateKey) {
+  const list = document.getElementById("delete-event-list");
+  const dateText = document.getElementById("delete-event-date");
+
+  list.innerHTML = "";
+  dateText.textContent = `${dateKey} の予定一覧`;
+
+  const dayEvents = events[dateKey];
+
+  if (!dayEvents || dayEvents.length === 0) {
+    list.innerHTML = "<li>この日の予定はありません</li>";
+    return;
+  }
+
+  dayEvents.forEach((event, index) => {
+    const li = document.createElement("li");
+
+    const name = document.createElement("span");
+    name.textContent = event.title === "バイト"
+      ? `バイト（${event.hours}時間）`
+      : event.title;
+
+    const deleteButton = document.createElement("button");
+    deleteButton.textContent = "削除";
+
+    deleteButton.addEventListener("click", () => {
+      if (confirm(`「${name.textContent}」を削除しますか？`)) {
+        events[dateKey].splice(index, 1);
+
+        if (events[dateKey].length === 0) {
+          delete events[dateKey];
+        }
+
+        saveEvents();
+        renderCalendar();
+        showDeleteEventList(dateKey);
+      }
+    });
+
+    li.appendChild(name);
+    li.appendChild(deleteButton);
+    list.appendChild(li);
+  });
+}
