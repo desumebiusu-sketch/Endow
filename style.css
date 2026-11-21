@@ -686,3 +686,31 @@ h1 {
     overflow: visible;
   }
 }
+
+
+/* スマホのカレンダーを見やすく調整 */
+@media (max-width: 600px) {
+  .day {
+    min-height: 85px;
+    padding: 5px 3px;
+    font-size: 13px;
+  }
+
+  .event {
+    font-size: 11px;
+    padding: 4px 3px;
+    margin: 3px 0;
+    line-height: 1.4;
+  }
+
+  .event-work span {
+    font-size: 13px;
+  }
+
+  .event-work button {
+    width: 26px;
+    height: 25px;
+    min-width: 26px;
+    font-size: 14px;
+  }
+}
