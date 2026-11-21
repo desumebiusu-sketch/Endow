@@ -1195,6 +1195,30 @@ function renderAnnualIncomeCheck() {
 
   // 年間給料を計算
   const annualSalary = Math.floor(totalHours * wage);
+  // 親の所得税チェック
+const taxFullLimit = incomeAge.value === "19to22"
+  ? 1590000
+  : 1360000;
+
+const taxFinalLimit = incomeAge.value === "19to22"
+  ? 1970000
+  : 1360000;
+
+const taxMessage = document.getElementById("tax-income-message");
+
+document.getElementById("tax-full-limit").textContent =
+  taxFullLimit.toLocaleString() + "円";
+
+document.getElementById("tax-final-limit").textContent =
+  taxFinalLimit.toLocaleString() + "円";
+
+if (annualSalary <= taxFullLimit) {
+  taxMessage.textContent = "🌟 親の控除は最大額を維持できる目安です！";
+} else if (annualSalary <= taxFinalLimit) {
+  taxMessage.textContent = "⚠️ 親の控除額が段階的に減る可能性があります。";
+} else {
+  taxMessage.textContent = "🚨 親の控除の対象外となる目安です。";
+}
 
   // 残り金額
   const remaining = limit - annualSalary;
