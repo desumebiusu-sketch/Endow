@@ -71,6 +71,27 @@ function renderCalendar() {
       events[dateKey].forEach((event, index) => {
         const eventElement = document.createElement("div");
         eventElement.classList.add("event");
+// 予定を直接クリックして削除
+eventElement.addEventListener("click", (e) => {
+  if (!isDeleteMode) return;
+
+  e.stopPropagation();
+
+  const name = event.title === "バイト"
+    ? `バイト（${event.hours}時間）`
+    : event.title;
+
+  if (confirm(`「${name}」を削除しますか？`)) {
+    events[dateKey].splice(index, 1);
+
+    if (events[dateKey].length === 0) {
+      delete events[dateKey];
+    }
+
+    saveEvents();
+    renderCalendar();
+  }
+});
 
         // 予定の文字
         const eventText = document.createElement("span");
@@ -137,12 +158,10 @@ addEventButton.addEventListener("click", () => {
   const title = eventTitle.value.trim();
 
   if (!date) {
-    alert("日付を選択してください");
     return;
   }
 
   if (!title) {
-    alert("予定を入力してください");
     return;
   }
 
