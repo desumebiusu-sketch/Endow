@@ -267,3 +267,44 @@ h1 {
   padding: 12px;
   border-radius: 10px;
 }
+
+
+/* 年収・税金チェックの共通デザイン */
+.annual-income-check,
+.tax-income-check {
+  background: #f0f7ff;
+  border: 2px solid #b8d8f5;
+  border-radius: 15px;
+  padding: 20px;
+  margin-top: 25px;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+/* 見出し */
+.annual-income-check h2,
+.tax-income-check h2 {
+  color: #245b8f;
+  margin-top: 5px;
+}
+
+/* 金額表示 */
+.annual-income-check h1,
+.annual-income-check h2,
+.tax-income-check h2 {
+  overflow-wrap: anywhere;
+}
+
+/* 説明文 */
+.annual-income-check p,
+.tax-income-check p {
+  color: #444;
+  line-height: 1.6;
+}
+
+/* 年収チェックの警告 */
+#income-status,
+#income-message,
+#tax-income-message {
+  font-weight: bold;
+}
