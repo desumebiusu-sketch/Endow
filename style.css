@@ -1561,3 +1561,72 @@ h3 {
     margin: 14px 0;
   }
 }
+
+
+/* ==========================
+   見出し・文字サイズ統一
+========================== */
+
+/* 大見出し */
+h1 {
+  color: #263445;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+
+/* 各画面の見出し */
+h2 {
+  color: #34445a;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+/* 小見出し */
+h3 {
+  color: #44546a;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+/* 説明文 */
+p {
+  color: #596579;
+  line-height: 1.65;
+}
+
+/* 金額など重要な情報 */
+.monthly-balance-card h1 {
+  color: white;
+  font-size: 40px;
+  font-weight: 800;
+}
+
+/* 年収チェックの重要な金額 */
+.annual-income-check h1 {
+  font-size: 30px;
+  font-weight: 800;
+}
+
+/* ToDoの文字 */
+#todo-list li {
+  font-size: 15px;
+}
+
+/* スマホ */
+@media (max-width: 600px) {
+  h2 {
+    font-size: 20px;
+  }
+
+  h3 {
+    font-size: 16px;
+  }
+
+  .monthly-balance-card h1 {
+    font-size: 32px;
+  }
+
+  .annual-income-check h1 {
+    font-size: 27px;
+  }
+}
