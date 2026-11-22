@@ -1566,3 +1566,109 @@ document.getElementById("add-favorite-event").addEventListener("click", () => {
 
 // 最初に登録内容を表示
 renderFavoriteEvents();
+
+
+// ==============================
+// よく使う支出項目
+// ==============================
+
+const favoriteExpenseToggle = document.getElementById("favorite-expense-toggle");
+const favoriteExpenseList = document.getElementById("favorite-expense-list");
+const favoriteExpenseEditor = document.getElementById("favorite-expense-editor");
+const favoriteExpenseManageList = document.getElementById("favorite-expense-manage-list");
+
+let favoriteExpenses = JSON.parse(
+  localStorage.getItem("endow-favorite-expenses")
+) || ["食費", "交通費", "飲み物", "娯楽", "買い物"];
+
+// 登録内容を保存
+function saveFavoriteExpenses() {
+  localStorage.setItem(
+    "endow-favorite-expenses",
+    JSON.stringify(favoriteExpenses)
+  );
+}
+
+// 項目一覧を更新
+function renderFavoriteExpenses() {
+  favoriteExpenseList.innerHTML = "";
+  favoriteExpenseManageList.innerHTML = "";
+
+  favoriteExpenses.forEach((word, index) => {
+    // 選択用ボタン
+    const selectButton = document.createElement("button");
+    selectButton.type = "button";
+    selectButton.className = "favorite-expense";
+    selectButton.textContent = word;
+
+    selectButton.addEventListener("click", () => {
+      document.getElementById("expense-name").value = word;
+      favoriteExpenseList.style.display = "none";
+      favoriteExpenseToggle.textContent = "▼ よく使う項目";
+    });
+
+    favoriteExpenseList.appendChild(selectButton);
+
+    // 削除用ボタン
+    const item = document.createElement("li");
+    const deleteButton = document.createElement("button");
+
+    deleteButton.type = "button";
+    deleteButton.textContent = "削除";
+
+    deleteButton.addEventListener("click", () => {
+      favoriteExpenses.splice(index, 1);
+      saveFavoriteExpenses();
+      renderFavoriteExpenses();
+    });
+
+    item.textContent = word + " ";
+    item.appendChild(deleteButton);
+    favoriteExpenseManageList.appendChild(item);
+  });
+}
+
+// メニューを開閉
+favoriteExpenseToggle.addEventListener("click", () => {
+  const isHidden = favoriteExpenseList.style.display === "none";
+
+  favoriteExpenseList.style.display = isHidden ? "block" : "none";
+  favoriteExpenseToggle.textContent = isHidden
+    ? "▲ よく使う項目"
+    : "▼ よく使う項目";
+});
+
+// 編集画面を開く
+document.getElementById("edit-favorite-expense").addEventListener("click", () => {
+  favoriteExpenseEditor.style.display = "block";
+});
+
+// 編集画面を閉じる
+document.getElementById("close-favorite-expense-editor").addEventListener("click", () => {
+  favoriteExpenseEditor.style.display = "none";
+});
+
+// 新しい支出項目を登録
+document.getElementById("add-favorite-expense").addEventListener("click", () => {
+  const input = document.getElementById("new-favorite-expense");
+  const word = input.value.trim();
+
+  if (word === "") {
+    alert("支出名を入力してください");
+    return;
+  }
+
+  if (favoriteExpenses.includes(word)) {
+    alert("その項目はすでに登録されています");
+    return;
+  }
+
+  favoriteExpenses.push(word);
+  saveFavoriteExpenses();
+  renderFavoriteExpenses();
+
+  input.value = "";
+});
+
+// 最初に項目を表示
+renderFavoriteExpenses();

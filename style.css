@@ -805,3 +805,43 @@ h1 {
   cursor: pointer;
   font-size: 13px;
 }
+
+
+/* よく使う支出メニュー */
+#favorite-expense-toggle,
+#edit-favorite-expense,
+#close-favorite-expense-editor {
+  margin-top: 6px;
+  padding: 7px 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background: #f5f7fa;
+  color: #333;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+#favorite-expense-list {
+  margin-top: 6px;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: white;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+#favorite-expense-list[style*="display: block"] {
+  display: flex !important;
+}
+
+.favorite-expense {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 15px;
+  background: #e8f5e9;
+  color: #28733b;
+  cursor: pointer;
+  font-size: 13px;
+}

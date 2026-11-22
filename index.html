@@ -282,11 +282,51 @@
   <h3>🧾 今月の支出メモ</h3>
 
 <div class="expense-form">
+  
+<input
+  type="text"
+  id="expense-name"
+  placeholder="支出内容（例：食費）"
+>
+
+<button type="button" id="favorite-expense-toggle">
+  ▼ よく使う項目
+</button>
+
+<div id="favorite-expense-list" style="display: none;">
+
+  <button type="button" class="favorite-expense">食費</button>
+  <button type="button" class="favorite-expense">交通費</button>
+  <button type="button" class="favorite-expense">飲み物</button>
+  <button type="button" class="favorite-expense">娯楽</button>
+  <button type="button" class="favorite-expense">買い物</button>
+
+</div>
+
+<button type="button" id="edit-favorite-expense">
+  ⚙️ 項目を編集
+</button>
+
+<div id="favorite-expense-editor" style="display: none;">
+
   <input
     type="text"
-    id="expense-name"
-    placeholder="支出内容（例：食費）"
+    id="new-favorite-expense"
+    placeholder="登録したい支出名"
   >
+
+  <button type="button" id="add-favorite-expense">
+    ＋ 登録
+  </button>
+
+  <ul id="favorite-expense-manage-list"></ul>
+
+  <button type="button" id="close-favorite-expense-editor">
+    閉じる
+  </button>
+
+</div>
+
 
   <input
     type="number"
@@ -431,3 +471,4 @@
 
 </body>
 </html>
+
