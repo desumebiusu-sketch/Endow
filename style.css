@@ -1225,3 +1225,22 @@ h1 {
     min-height: 110px;
   }
 }
+
+/* PC：月切り替えを予定追加の上に配置 */
+@media (min-width: 901px) {
+  .calendar-header {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .month-navigation {
+    order: 1;
+    margin: 0 auto;
+  }
+
+  .event-form {
+    order: 2;
+  }
+}
