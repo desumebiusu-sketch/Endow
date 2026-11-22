@@ -1462,3 +1462,28 @@ function showDeleteEventList(dateKey) {
     list.appendChild(li);
   });
 }
+
+
+// よく使う予定の選択メニュー
+const favoriteEventToggle = document.getElementById("favorite-event-toggle");
+const favoriteEventList = document.getElementById("favorite-event-list");
+
+// メニューを開閉
+favoriteEventToggle.addEventListener("click", () => {
+  const isHidden = favoriteEventList.style.display === "none";
+
+  favoriteEventList.style.display = isHidden ? "block" : "none";
+  favoriteEventToggle.textContent = isHidden
+    ? "▲ よく使う項目"
+    : "▼ よく使う項目";
+});
+
+// 項目を選択したら入力欄に入れる
+document.querySelectorAll(".favorite-event").forEach(button => {
+  button.addEventListener("click", () => {
+    document.getElementById("event-title").value = button.dataset.title;
+
+    favoriteEventList.style.display = "none";
+    favoriteEventToggle.textContent = "▼ よく使う項目";
+  });
+});

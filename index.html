@@ -35,11 +35,25 @@
 
           <input type="date" id="event-date">
 
-          <input
-            type="text"
-            id="event-title"
-            placeholder="予定を入力してください"
-          >
+          
+<input
+  type="text"
+  id="event-title"
+  placeholder="予定を入力してください"
+>
+
+<button type="button" id="favorite-event-toggle">
+  ▼ よく使う項目
+</button>
+
+<div id="favorite-event-list" style="display: none;">
+  <button type="button" class="favorite-event" data-title="学校">学校</button>
+  <button type="button" class="favorite-event" data-title="授業">授業</button>
+  <button type="button" class="favorite-event" data-title="遊び">遊び</button>
+  <button type="button" class="favorite-event" data-title="病院">病院</button>
+  <button type="button" class="favorite-event" data-title="課題">課題</button>
+</div>
+
 
           <button id="add-event">追加</button>
           <button id="add-work-button">バイトを追加</button>

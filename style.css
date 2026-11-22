@@ -767,3 +767,41 @@ h1 {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+
+/* よく使う予定メニュー */
+#favorite-event-toggle {
+  margin-top: 6px;
+  padding: 7px 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background: #f5f7fa;
+  color: #333;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+#favorite-event-list {
+  margin-top: 6px;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: white;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+#favorite-event-list[style*="display: block"] {
+  display: flex !important;
+}
+
+.favorite-event {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 15px;
+  background: #e8f1ff;
+  color: #2463a6;
+  cursor: pointer;
+  font-size: 13px;
+}
