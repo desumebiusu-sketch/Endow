@@ -1630,3 +1630,17 @@ p {
     font-size: 27px;
   }
 }
+
+
+/* 支出項目の編集：閉じるボタンを一番上に */
+#favorite-expense-editor {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px;
+}
+
+#favorite-expense-editor #close-favorite-expense-editor {
+  grid-row: 1;
+  grid-column: 1 / -1;
+  margin-bottom: 5px;
+}
