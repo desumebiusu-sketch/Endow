@@ -1638,14 +1638,16 @@ favoriteExpenseToggle.addEventListener("click", () => {
     : "▼ よく使う項目";
 });
 
-// 編集画面を開く
+// 編集画面を同じボタンで開閉
 document.getElementById("edit-favorite-expense").addEventListener("click", () => {
-  favoriteExpenseEditor.style.display = "block";
-});
+  const button = document.getElementById("edit-favorite-expense");
+  const isHidden = favoriteExpenseEditor.style.display === "none";
 
-// 編集画面を閉じる
-document.getElementById("close-favorite-expense-editor").addEventListener("click", () => {
-  favoriteExpenseEditor.style.display = "none";
+  favoriteExpenseEditor.style.display = isHidden ? "block" : "none";
+
+  button.textContent = isHidden
+    ? "▲ 編集画面を閉じる"
+    : "▼ 項目を編集";
 });
 
 // 新しい支出項目を登録
