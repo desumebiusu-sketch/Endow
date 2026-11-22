@@ -1064,3 +1064,70 @@ h1 {
   color: #333;
   border-radius: 7px;
 }
+
+
+/* ==========================
+   スマホ入力画面のコンパクト化
+========================== */
+
+@media (max-width: 600px) {
+
+  /* 予定入力エリア全体 */
+  .event-form {
+    padding: 10px;
+    gap: 7px;
+    margin-bottom: 10px;
+  }
+
+  /* 見出し */
+  .event-form h3 {
+    font-size: 16px;
+    margin: 0 0 3px;
+  }
+
+  /* 日付・予定入力欄 */
+  .event-form input {
+    height: 46px;
+    padding: 8px 10px;
+    font-size: 15px;
+    border-radius: 8px;
+  }
+
+  /* 操作ボタン */
+  .event-form button {
+    min-height: 42px;
+    padding: 8px 5px;
+    font-size: 14px;
+    border-radius: 8px;
+  }
+
+  /* よく使う項目の選択肢 */
+  #favorite-event-list {
+    padding: 7px;
+    margin-top: 3px;
+    gap: 5px;
+  }
+
+  .event-form #favorite-event-list .favorite-event {
+    padding: 8px 5px;
+    font-size: 13px;
+  }
+
+  /* 項目編集エリア */
+  #favorite-event-editor {
+    padding: 8px;
+    margin-top: 3px;
+  }
+
+  #favorite-event-manage-list li {
+    padding: 6px 8px;
+    margin-bottom: 4px;
+    font-size: 13px;
+  }
+
+  #favorite-event-editor #close-favorite-event-editor {
+    padding: 8px;
+    min-height: 38px;
+  }
+
+}
