@@ -1532,14 +1532,16 @@ favoriteEventToggle.addEventListener("click", () => {
     : "▼ よく使う項目";
 });
 
-// 編集画面を開く
+// 編集画面を同じボタンで開閉
 document.getElementById("edit-favorite-event").addEventListener("click", () => {
-  favoriteEventEditor.style.display = "block";
-});
+  const button = document.getElementById("edit-favorite-event");
+  const isHidden = favoriteEventEditor.style.display === "none";
 
-// 編集画面を閉じる
-document.getElementById("close-favorite-event-editor").addEventListener("click", () => {
-  favoriteEventEditor.style.display = "none";
+  favoriteEventEditor.style.display = isHidden ? "block" : "none";
+
+  button.textContent = isHidden
+    ? "▲ 編集画面を閉じる"
+    : "▼ 項目を編集";
 });
 
 // 新しい予定を登録
@@ -1562,6 +1564,8 @@ document.getElementById("add-favorite-event").addEventListener("click", () => {
   renderFavoriteEvents();
 
   input.value = "";
+
+
 });
 
 // 最初に登録内容を表示
