@@ -1131,3 +1131,13 @@ h1 {
   }
 
 }
+
+
+/* 項目編集画面の閉じるボタンを上に移動 */
+@media (max-width: 600px) {
+  #favorite-event-editor #close-favorite-event-editor {
+    grid-row: 1;
+    grid-column: 1 / -1;
+    margin-bottom: 5px;
+  }
+}
