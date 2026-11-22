@@ -1425,3 +1425,61 @@ h3 {
     max-width: 100%;
   }
 }
+
+
+/* ==========================
+   操作しやすさ改善
+========================== */
+
+/* ボタン共通 */
+button {
+  min-height: 46px;
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: bold;
+  touch-action: manipulation;
+  cursor: pointer;
+}
+
+/* ボタンを押したとき */
+button:active {
+  transform: scale(0.97);
+  opacity: 0.8;
+}
+
+/* 入力欄 */
+input,
+select,
+textarea {
+  min-height: 44px;
+  font-size: 16px;
+}
+
+/* ボタン同士の間隔 */
+.event-form button,
+.todo-form button {
+  margin-top: 3px;
+  margin-bottom: 3px;
+}
+
+/* スマホでの操作性 */
+@media (max-width: 600px) {
+  button {
+    min-height: 48px;
+    padding: 11px 14px;
+    font-size: 15px;
+  }
+
+  input,
+  select,
+  textarea {
+    min-height: 48px;
+  }
+
+  /* カレンダー内の小さな操作ボタンは維持 */
+  .event-work button,
+  .delete-event {
+    min-height: 0;
+  }
+}
