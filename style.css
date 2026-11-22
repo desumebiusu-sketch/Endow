@@ -845,3 +845,133 @@ h1 {
   cursor: pointer;
   font-size: 13px;
 }
+
+
+/* ==========================
+   スマホ版カレンダー操作エリア
+========================== */
+
+@media (max-width: 600px) {
+
+  /* 月切り替えを一番上に */
+  .calendar-header {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .month-navigation {
+    order: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+  }
+
+  .event-form {
+    order: 2;
+    display: grid !important;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "heading heading"
+      "date date"
+      "title title"
+      "favorite edit"
+      "favorite-list favorite-list"
+      "editor editor"
+      "add add"
+      "work work"
+      "delete delete";
+    gap: 10px;
+    width: 100%;
+    padding: 14px;
+  }
+
+  /* 各パーツの配置 */
+  .event-form h3 {
+    grid-area: heading;
+  }
+
+  #event-date {
+    grid-area: date;
+  }
+
+  #event-title {
+    grid-area: title;
+  }
+
+  #favorite-event-toggle {
+    grid-area: favorite;
+  }
+
+  #edit-favorite-event {
+    grid-area: edit;
+  }
+
+  #favorite-event-list {
+    grid-area: favorite-list;
+  }
+
+  #favorite-event-editor {
+    grid-area: editor;
+  }
+
+  #add-event {
+    grid-area: add;
+  }
+
+  #add-work-button {
+    grid-area: work;
+  }
+
+  #delete-event-mode-button {
+    grid-area: delete;
+  }
+
+  /* 入力欄 */
+  .event-form input {
+    width: 100%;
+    min-width: 0;
+    margin: 0;
+    padding: 12px;
+    font-size: 16px;
+  }
+
+  /* ボタン共通 */
+  .event-form button {
+    width: 100%;
+    min-width: 0;
+    margin: 0;
+    padding: 13px 5px;
+    font-size: 14px;
+  }
+
+  /* よく使う項目の選択肢 */
+  #favorite-event-list[style*="display: block"] {
+    display: flex !important;
+    flex-wrap: wrap;
+    grid-area: favorite-list;
+  }
+
+  /* 項目編集画面 */
+  #favorite-event-editor[style*="display: block"] {
+    display: grid !important;
+    grid-template-columns: 1fr auto;
+    gap: 8px;
+  }
+
+  #new-favorite-event {
+    grid-column: 1;
+  }
+
+  #add-favorite-event {
+    grid-column: 2;
+  }
+
+  #favorite-event-manage-list,
+  #close-favorite-event-editor {
+    grid-column: 1 / -1;
+  }
+}
