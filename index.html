@@ -53,6 +53,29 @@
   <button type="button" class="favorite-event" data-title="病院">病院</button>
   <button type="button" class="favorite-event" data-title="課題">課題</button>
 </div>
+<button type="button" id="edit-favorite-event">
+  ⚙️ 項目を編集
+</button>
+
+<div id="favorite-event-editor" style="display: none;">
+
+  <input
+    type="text"
+    id="new-favorite-event"
+    placeholder="登録したい予定名"
+  >
+
+  <button type="button" id="add-favorite-event">
+    ＋ 登録
+  </button>
+
+  <ul id="favorite-event-manage-list"></ul>
+
+  <button type="button" id="close-favorite-event-editor">
+    閉じる
+  </button>
+
+</div>
 
 
           <button id="add-event">追加</button>

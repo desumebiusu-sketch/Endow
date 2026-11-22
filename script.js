@@ -1464,9 +1464,63 @@ function showDeleteEventList(dateKey) {
 }
 
 
+
 // よく使う予定の選択メニュー
 const favoriteEventToggle = document.getElementById("favorite-event-toggle");
 const favoriteEventList = document.getElementById("favorite-event-list");
+const favoriteEventEditor = document.getElementById("favorite-event-editor");
+const favoriteEventManageList = document.getElementById("favorite-event-manage-list");
+
+let favoriteEvents = JSON.parse(
+  localStorage.getItem("endow-favorite-events")
+) || ["学校", "授業", "遊び", "病院", "課題"];
+
+// 登録内容を保存
+function saveFavoriteEvents() {
+  localStorage.setItem(
+    "endow-favorite-events",
+    JSON.stringify(favoriteEvents)
+  );
+}
+
+// 選択メニューと編集画面を更新
+function renderFavoriteEvents() {
+  favoriteEventList.innerHTML = "";
+  favoriteEventManageList.innerHTML = "";
+
+  favoriteEvents.forEach((word, index) => {
+    // 選択用ボタン
+    const selectButton = document.createElement("button");
+    selectButton.type = "button";
+    selectButton.className = "favorite-event";
+    selectButton.textContent = word;
+
+    selectButton.addEventListener("click", () => {
+      document.getElementById("event-title").value = word;
+      favoriteEventList.style.display = "none";
+      favoriteEventToggle.textContent = "▼ よく使う項目";
+    });
+
+    favoriteEventList.appendChild(selectButton);
+
+    // 編集画面の削除ボタン
+    const item = document.createElement("li");
+    const deleteButton = document.createElement("button");
+
+    deleteButton.type = "button";
+    deleteButton.textContent = "削除";
+
+    deleteButton.addEventListener("click", () => {
+      favoriteEvents.splice(index, 1);
+      saveFavoriteEvents();
+      renderFavoriteEvents();
+    });
+
+    item.textContent = word + " ";
+    item.appendChild(deleteButton);
+    favoriteEventManageList.appendChild(item);
+  });
+}
 
 // メニューを開閉
 favoriteEventToggle.addEventListener("click", () => {
@@ -1478,12 +1532,37 @@ favoriteEventToggle.addEventListener("click", () => {
     : "▼ よく使う項目";
 });
 
-// 項目を選択したら入力欄に入れる
-document.querySelectorAll(".favorite-event").forEach(button => {
-  button.addEventListener("click", () => {
-    document.getElementById("event-title").value = button.dataset.title;
-
-    favoriteEventList.style.display = "none";
-    favoriteEventToggle.textContent = "▼ よく使う項目";
-  });
+// 編集画面を開く
+document.getElementById("edit-favorite-event").addEventListener("click", () => {
+  favoriteEventEditor.style.display = "block";
 });
+
+// 編集画面を閉じる
+document.getElementById("close-favorite-event-editor").addEventListener("click", () => {
+  favoriteEventEditor.style.display = "none";
+});
+
+// 新しい予定を登録
+document.getElementById("add-favorite-event").addEventListener("click", () => {
+  const input = document.getElementById("new-favorite-event");
+  const word = input.value.trim();
+
+  if (word === "") {
+    alert("予定名を入力してください");
+    return;
+  }
+
+  if (favoriteEvents.includes(word)) {
+    alert("その予定はすでに登録されています");
+    return;
+  }
+
+  favoriteEvents.push(word);
+  saveFavoriteEvents();
+  renderFavoriteEvents();
+
+  input.value = "";
+});
+
+// 最初に登録内容を表示
+renderFavoriteEvents();
