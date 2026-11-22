@@ -996,3 +996,71 @@ h1 {
 .event-form #favorite-event-list .favorite-event:active {
   background: #c9ddfa;
 }
+
+
+/* よく使う予定の編集画面をスマホ向けに整理 */
+#favorite-event-editor {
+  width: 100%;
+  padding: 10px;
+  margin-top: 8px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+}
+
+/* 項目登録欄 */
+#favorite-event-editor #new-favorite-event {
+  width: 100%;
+  min-width: 0;
+  padding: 10px;
+  font-size: 14px;
+}
+
+/* 登録ボタン */
+#favorite-event-editor #add-favorite-event {
+  width: auto;
+  padding: 10px 16px;
+  background: #3478d4;
+  color: white;
+  border-radius: 7px;
+}
+
+/* 登録済み項目 */
+#favorite-event-manage-list {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0;
+}
+
+#favorite-event-manage-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  margin-bottom: 6px;
+  background: #f3f5f9;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+/* 削除ボタン */
+#favorite-event-editor #favorite-event-manage-list li button {
+  width: auto;
+  padding: 6px 12px;
+  margin: 0;
+  background: #e45b5b;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 12px;
+}
+
+/* 閉じるボタン */
+#favorite-event-editor #close-favorite-event-editor {
+  width: 100%;
+  padding: 10px;
+  background: #e5e8ef;
+  color: #333;
+  border-radius: 7px;
+}
