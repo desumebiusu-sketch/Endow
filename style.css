@@ -975,3 +975,24 @@ h1 {
     grid-column: 1 / -1;
   }
 }
+
+
+/* よく使う予定の選択肢をコンパクトに */
+.event-form #favorite-event-list .favorite-event {
+  width: auto;
+  flex: 1 1 calc(33.333% - 6px);
+  min-width: 0;
+  padding: 12px 5px;
+  margin: 0;
+  border: none;
+  border-radius: 10px;
+  background: #e8f1ff;
+  color: #2463a6;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+/* 選択肢を押したとき */
+.event-form #favorite-event-list .favorite-event:active {
+  background: #c9ddfa;
+}
