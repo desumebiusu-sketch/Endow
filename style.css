@@ -1483,3 +1483,81 @@ textarea {
     min-height: 0;
   }
 }
+
+
+/* ==========================
+   画面全体の余白を統一
+========================== */
+
+/* 見出し */
+h1 {
+  margin: 22px 0 18px;
+  line-height: 1.4;
+}
+
+h2 {
+  margin-top: 16px;
+  margin-bottom: 12px;
+}
+
+h3 {
+  margin-top: 12px;
+  margin-bottom: 10px;
+}
+
+/* 各画面の基本カード */
+.todo-container,
+.annual-income-check,
+.tax-income-check {
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+/* カレンダー */
+.calendar {
+  padding: 18px;
+}
+
+/* 入力エリア */
+.event-form {
+  margin-bottom: 16px;
+}
+
+/* ToDoリスト */
+#todo-list {
+  margin-top: 14px;
+}
+
+#todo-list li {
+  margin-bottom: 8px;
+}
+
+/* 精算画面の残高カード */
+.monthly-balance-card {
+  padding: 24px 18px;
+  margin: 18px 0;
+}
+
+/* スマホ */
+@media (max-width: 600px) {
+  h1 {
+    margin: 16px 0;
+    font-size: 24px;
+  }
+
+  .todo-container,
+  .annual-income-check,
+  .tax-income-check {
+    padding: 14px;
+    margin-bottom: 16px;
+  }
+
+  .calendar {
+    padding: 8px;
+  }
+
+  .monthly-balance-card {
+    padding: 20px 12px;
+    margin: 14px 0;
+  }
+}
