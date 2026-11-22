@@ -1365,3 +1365,63 @@ button:hover {
   background: #3478d4;
   color: white;
 }
+
+
+/* ==========================
+   入力欄・カードデザイン統一
+========================== */
+
+/* 入力欄・選択欄 */
+input,
+select,
+textarea {
+  box-sizing: border-box;
+  border: 1px solid #d5dce6;
+  border-radius: 9px;
+  padding: 10px 12px;
+  font-family: inherit;
+  font-size: 15px;
+  color: #333;
+  background: #fff;
+  outline: none;
+}
+
+/* 入力中の枠線 */
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: #3478d4;
+  box-shadow: 0 0 0 3px rgba(52, 120, 212, 0.12);
+}
+
+/* 各画面のカード */
+.calendar,
+.todo-container,
+.annual-income-check,
+.tax-income-check {
+  border-radius: 14px;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.07);
+}
+
+/* 画面の見出し */
+h2,
+h3 {
+  line-height: 1.4;
+}
+
+/* リストの角丸 */
+#todo-list li,
+#delete-event-list li,
+#favorite-event-manage-list li {
+  border-radius: 9px;
+}
+
+/* 入力欄のスマホ対応 */
+@media (max-width: 600px) {
+  input,
+  select,
+  textarea {
+    font-size: 16px;
+    max-width: 100%;
+  }
+}
