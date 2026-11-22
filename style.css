@@ -1263,3 +1263,10 @@ h1 {
     order: 2;
   }
 }
+
+/* 支出項目の編集：閉じるボタンを上に配置 */
+#favorite-expense-editor #close-favorite-expense-editor {
+  grid-row: 1;
+  grid-column: 1 / -1;
+  margin-bottom: 5px;
+}
