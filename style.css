@@ -1244,3 +1244,22 @@ h1 {
     order: 2;
   }
 }
+
+/* 画面幅が狭いPCでも縦並びにする */
+@media (min-width: 601px) and (max-width: 900px) {
+  .calendar-header {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .month-navigation {
+    order: 1;
+    margin: 0 auto;
+  }
+
+  .event-form {
+    order: 2;
+  }
+}
