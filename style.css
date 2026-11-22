@@ -1141,3 +1141,87 @@ h1 {
     margin-bottom: 5px;
   }
 }
+
+
+/* ==========================
+   PC版カレンダー操作エリア
+========================== */
+
+@media (min-width: 901px) {
+
+  .calendar {
+    max-width: 1100px;
+  }
+
+  .calendar-header {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  /* 月切り替えを一番上 */
+  .month-navigation {
+    order: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    width: 100%;
+  }
+
+  .month-navigation h2 {
+    min-width: 160px;
+    font-size: 24px;
+  }
+
+  /* 予定入力エリア */
+  .event-form {
+    order: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    padding: 18px;
+  }
+
+  .event-form h3 {
+    margin: 0 0 4px;
+  }
+
+  .event-form input {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding: 12px;
+    font-size: 16px;
+  }
+
+  /* よく使う項目と編集を横並び */
+  #favorite-event-toggle,
+  #edit-favorite-event {
+    width: calc(50% - 5px);
+    min-height: 44px;
+  }
+
+  #favorite-event-toggle {
+    align-self: flex-start;
+  }
+
+  /* 入力ボタン */
+  .event-form > button:not(#favorite-event-toggle):not(#edit-favorite-event) {
+    width: 100%;
+    min-height: 46px;
+    margin: 0;
+    font-size: 15px;
+  }
+
+  /* カレンダー */
+  .weekdays div {
+    padding: 12px;
+  }
+
+  .day {
+    min-height: 110px;
+  }
+}
