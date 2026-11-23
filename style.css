@@ -1644,3 +1644,24 @@ p {
   grid-column: 1 / -1;
   margin-bottom: 5px;
 }
+
+/* スマホ：貯金・目標の入力欄を縦並びにする */
+@media (max-width: 600px) {
+
+  #savings-screen .todo-form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+  }
+
+  #savings-screen .todo-form input,
+  #savings-screen .todo-form button {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    margin: 0;
+  }
+
+}
