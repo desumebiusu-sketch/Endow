@@ -1051,11 +1051,7 @@ function renderSettlementSavings() {
     0
   );
 
-  document.getElementById("settlement-total-saved").textContent =
-    totalSaved.toLocaleString() + "円";
-
-  document.getElementById("settlement-total-target").textContent =
-    "合計目標金額：" + totalTarget.toLocaleString() + "円";
+  
 }
 
 // 最初に表示
