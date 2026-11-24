@@ -1763,3 +1763,51 @@ p {
   border-radius: 9px;
   padding: 11px;
 }
+
+
+/* ==========================
+   ToDo画面を画面いっぱいに広げる
+========================== */
+
+#todo-screen {
+  width: 100%;
+  min-height: calc(100vh - 180px);
+}
+
+#todo-screen .todo-container {
+  width: calc(100% - 32px);
+  max-width: none;
+  min-height: calc(100vh - 240px);
+  margin: 20px auto;
+  padding: 25px;
+  box-sizing: border-box;
+}
+
+/* 入力欄を横いっぱいに広げる */
+#todo-screen .todo-form {
+  display: flex;
+  width: 100%;
+  gap: 12px;
+}
+
+#todo-screen #todo-input {
+  flex: 1;
+  min-width: 0;
+}
+
+#todo-screen #todo-date {
+  width: 220px;
+}
+
+/* スマホでは入力欄を折り返す */
+@media (max-width: 600px) {
+  #todo-screen .todo-form {
+    flex-wrap: wrap;
+  }
+
+  #todo-screen #todo-input,
+  #todo-screen #todo-date {
+    width: 100%;
+    flex: 1 1 100%;
+  }
+}
