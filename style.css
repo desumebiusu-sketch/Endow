@@ -1811,3 +1811,47 @@ p {
     flex: 1 1 100%;
   }
 }
+
+
+/* ==========================
+   ToDo画面を完全に画面幅いっぱいにする
+========================== */
+
+#todo-screen {
+  width: 100%;
+  max-width: none;
+}
+
+#todo-screen .todo-container {
+  width: 100vw !important;
+  max-width: none !important;
+  min-height: calc(100vh - 180px);
+  margin-left: calc(50% - 50vw) !important;
+  margin-right: 0 !important;
+  box-sizing: border-box;
+  border-radius: 0;
+}
+
+/* 入力欄 */
+#todo-screen .todo-form {
+  width: 100%;
+  display: flex;
+  gap: 12px;
+}
+
+#todo-screen #todo-input {
+  flex: 1;
+  min-width: 0;
+}
+
+@media (max-width: 600px) {
+  #todo-screen .todo-form {
+    flex-wrap: wrap;
+  }
+
+  #todo-screen #todo-input,
+  #todo-screen #todo-date {
+    width: 100%;
+    flex: 1 1 100%;
+  }
+}
