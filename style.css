@@ -1665,3 +1665,101 @@ p {
   }
 
 }
+
+
+/* ==========================
+   精算画面：緑のカードの文字色改善
+========================== */
+
+.monthly-balance-card {
+  color: #ffffff;
+}
+
+.monthly-balance-card p,
+.monthly-balance-card h2,
+.monthly-balance-card h3,
+.monthly-balance-card label,
+.monthly-balance-card span,
+.monthly-balance-card strong {
+  color: #ffffff;
+}
+
+/* 金額を目立たせる */
+.monthly-balance-card h1 {
+  color: #ffffff;
+  font-weight: 800;
+}
+
+/* 入力欄は黒文字のまま */
+.monthly-balance-card input {
+  color: #333333;
+  background: #ffffff;
+}
+
+
+/* ==========================
+   精算画面のボタンデザイン
+========================== */
+
+/* 支出を追加するボタン */
+#add-expense {
+  background: #ffffff;
+  color: #237b5b;
+  border: 2px solid #ffffff;
+  border-radius: 10px;
+  padding: 12px 22px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+#add-expense:hover {
+  background: #e5f5ed;
+  transform: translateY(-2px);
+}
+
+/* 精算内容を保存するボタン */
+#save-settlement {
+  background: #237b5b;
+  color: #ffffff;
+  border: 2px solid #237b5b;
+  border-radius: 10px;
+  padding: 13px 25px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 15px;
+  transition: 0.2s;
+}
+
+#save-settlement:hover {
+  background: #185c43;
+  transform: translateY(-2px);
+}
+
+/* 支出入力欄 */
+.expense-form input {
+  border: 1px solid #cbd5d0;
+  border-radius: 9px;
+  padding: 11px;
+}
+
+/* 緑のカードの文字色 */
+.monthly-balance-card,
+.monthly-balance-card p,
+.monthly-balance-card h1,
+.monthly-balance-card h2,
+.monthly-balance-card h3,
+.monthly-balance-card label,
+.monthly-balance-card span,
+.monthly-balance-card strong {
+  color: #ffffff;
+}
+
+/* 金額入力欄は黒文字 */
+.monthly-balance-card input {
+  color: #333333;
+  background: #ffffff;
+  border: none;
+  border-radius: 9px;
+  padding: 11px;
+}
